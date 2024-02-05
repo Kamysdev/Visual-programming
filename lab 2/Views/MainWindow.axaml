@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:lab_2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:lab_2.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Width="600"
+		Height="400"
+		MinHeight="300"
+		MinWidth="300"
+        x:Class="lab_2.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="lab_2">
+			<Grid ColumnDefinitions="200, 0.1, 600" ShowGridLines="True">
+				<StackPanel>
+					<Button Content="Khaki" HorizontalContentAlignment="Center" Background="Khaki" Height="50" Width="200"></Button>
+					<Button Content="Red" HorizontalContentAlignment="Center" Background="Red"></Button>
+					<Button Content="MediumVioletRed" HorizontalContentAlignment="Center" Background="MediumVioletRed" ></Button>
+					<Button Content="Bisque" HorizontalContentAlignment="Center" Background="Bisque"></Button>
+					<Button Content="LemonChiffon" HorizontalContentAlignment="Center" Background="LemonChiffon"></Button>
+					<Button Content="PowderBlue" HorizontalContentAlignment="Center" Background="PowderBlue"></Button>
+				</StackPanel>
+				
+			</Grid>
+</Window>

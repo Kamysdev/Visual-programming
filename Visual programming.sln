@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab 1", "lab 1\lab 1.csproj", "{E34279EB-CBE5-441C-AA1C-643FC84F8BCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab 1", "lab 1\lab 1.csproj", "{E34279EB-CBE5-441C-AA1C-643FC84F8BCD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab 2", "lab 2\lab 2.csproj", "{282A2272-7883-47CE-A0C8-26213C5AD671}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab 2.Desktop", "lab 2.Desktop\lab 2.Desktop.csproj", "{95549126-3CE7-41C2-84C4-269398A22967}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab2", "Lab2", "{D85AE54E-90A8-4627-938D-2657163D4ECC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,21 @@ Global
 		{E34279EB-CBE5-441C-AA1C-643FC84F8BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E34279EB-CBE5-441C-AA1C-643FC84F8BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E34279EB-CBE5-441C-AA1C-643FC84F8BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{282A2272-7883-47CE-A0C8-26213C5AD671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{282A2272-7883-47CE-A0C8-26213C5AD671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{282A2272-7883-47CE-A0C8-26213C5AD671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{282A2272-7883-47CE-A0C8-26213C5AD671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95549126-3CE7-41C2-84C4-269398A22967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95549126-3CE7-41C2-84C4-269398A22967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95549126-3CE7-41C2-84C4-269398A22967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95549126-3CE7-41C2-84C4-269398A22967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{282A2272-7883-47CE-A0C8-26213C5AD671} = {D85AE54E-90A8-4627-938D-2657163D4ECC}
+		{95549126-3CE7-41C2-84C4-269398A22967} = {D85AE54E-90A8-4627-938D-2657163D4ECC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EBD6783-4AA3-46D5-B9F5-BAE17F7E5223}
