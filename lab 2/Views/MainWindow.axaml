@@ -16,67 +16,79 @@
 	<Window.Styles>
 		<Style Selector="Button">
 			<Setter	Property="Foreground" Value="Black"/>
-			<Setter Property="Width" Value="200"/>
-			<Setter Property="Height" Value="40"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		</Style>
+		<Style Selector="Border">
 			<Setter Property="BorderBrush" Value="Black"/>
 			<Setter Property="BorderThickness" Value="2"/>
 		</Style>
 	</Window.Styles>
 
-	<Grid ColumnDefinitions="200, 0.1, 600">
+	<Grid ColumnDefinitions="0.33*, 0.001*, 0.66*">
 		<StackPanel>
-			<Button Click="ClickKhaki"
+			<Border>
+				<Button Click="ClickButton"
 					Content="Khaki"
-					HorizontalContentAlignment="Center"
-					Background="Khaki">
-			</Button>
-			<Button Click="ClickRed"
+					x:Name="buttonKhaki"
+					Background="Khaki"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="Red"
-					HorizontalContentAlignment="Center"
-					Background="Red">
-			</Button>
-			<Button Click="ClickMediumVioletRed"
+					x:Name="buttonRed"
+					Background="Red"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="MediumVioletRed"
-					HorizontalContentAlignment="Center"
-					Background="MediumVioletRed">
-			</Button>
-			<Button Click="ClickBisque"
+					x:Name="buttonMediumVioletRed"
+					Background="MediumVioletRed"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="Bisque"
-					HorizontalContentAlignment="Center"
-					Background="Bisque">
-			</Button>
-			<Button Click="ClickLemonChiffon"
+					x:Name="buttonBisque"
+					Background="Bisque"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="LemonChiffon"
-					HorizontalContentAlignment="Center"
-					Background="LemonChiffon">
-			</Button>
-			<Button Click="ClickPowderBlue"
+					x:Name="buttonLemonChiffon"
+					Background="LemonChiffon"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="PowderBlue"
-					HorizontalContentAlignment="Center"
-					Background="PowderBlue">
-			</Button>
-			<Button Click="ClickMintCream"
+					x:Name="buttonPowderBlue"
+					Background="PowderBlue"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="MintCream"
-					HorizontalContentAlignment="Center"
-					Background="MintCream">
-			</Button>
-			<Button Click="ClickMaroon"
+					x:Name="buttonMintCream"
+					Background="MintCream"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="Maroon"
-					HorizontalContentAlignment="Center"
-					Background="Maroon">
-			</Button>
-			<Button Click="ClickRosyBrown"
+					x:Name="buttonMaroon"
+					Background="Maroon"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="RosyBrown"
-					HorizontalContentAlignment="Center"
-					Background="RosyBrown">
-			</Button>
-			<Button Click="ClickLightPink"
+					x:Name="buttonRosyBrown"
+					Background="RosyBrown"/>
+			</Border>
+			<Border>
+				<Button Click="ClickButton"
 					Content="LightPink"
-					HorizontalContentAlignment="Center"
-					Background="LightPink">
-			</Button>
+					x:Name="buttonLightPink"
+					Background="LightPink"/>
+			</Border>
 		</StackPanel>
-		<GridSplitter Grid.Column="1" Background="Black"></GridSplitter>
-		<Canvas Grid.Column="2" Background="White" x:Name="squarePan"></Canvas>
+		<GridSplitter Grid.Column="1" Background="Black"/>
+		<Canvas Grid.Column="2" Background="White" x:Name="squarePan"/>
 	</Grid>
 </Window>
