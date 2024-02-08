@@ -4,23 +4,79 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:lab_2.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
 		Width="600"
 		Height="400"
 		MinHeight="300"
 		MinWidth="300"
         x:Class="lab_2.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="lab_2">
-			<Grid ColumnDefinitions="200, 0.1, 600" ShowGridLines="True">
-				<StackPanel>
-					<Button Content="Khaki" HorizontalContentAlignment="Center" Background="Khaki" Height="50" Width="200"></Button>
-					<Button Content="Red" HorizontalContentAlignment="Center" Background="Red"></Button>
-					<Button Content="MediumVioletRed" HorizontalContentAlignment="Center" Background="MediumVioletRed" ></Button>
-					<Button Content="Bisque" HorizontalContentAlignment="Center" Background="Bisque"></Button>
-					<Button Content="LemonChiffon" HorizontalContentAlignment="Center" Background="LemonChiffon"></Button>
-					<Button Content="PowderBlue" HorizontalContentAlignment="Center" Background="PowderBlue"></Button>
-				</StackPanel>
-				
-			</Grid>
+        Title="lab_2"
+		Background="White">
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter	Property="Foreground" Value="Black"/>
+			<Setter Property="Width" Value="200"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="BorderBrush" Value="Black"/>
+			<Setter Property="BorderThickness" Value="2"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid ColumnDefinitions="200, 0.1, 600">
+		<StackPanel>
+			<Button Click="ClickKhaki"
+					Content="Khaki"
+					HorizontalContentAlignment="Center"
+					Background="Khaki">
+			</Button>
+			<Button Click="ClickRed"
+					Content="Red"
+					HorizontalContentAlignment="Center"
+					Background="Red">
+			</Button>
+			<Button Click="ClickMediumVioletRed"
+					Content="MediumVioletRed"
+					HorizontalContentAlignment="Center"
+					Background="MediumVioletRed">
+			</Button>
+			<Button Click="ClickBisque"
+					Content="Bisque"
+					HorizontalContentAlignment="Center"
+					Background="Bisque">
+			</Button>
+			<Button Click="ClickLemonChiffon"
+					Content="LemonChiffon"
+					HorizontalContentAlignment="Center"
+					Background="LemonChiffon">
+			</Button>
+			<Button Click="ClickPowderBlue"
+					Content="PowderBlue"
+					HorizontalContentAlignment="Center"
+					Background="PowderBlue">
+			</Button>
+			<Button Click="ClickMintCream"
+					Content="MintCream"
+					HorizontalContentAlignment="Center"
+					Background="MintCream">
+			</Button>
+			<Button Click="ClickMaroon"
+					Content="Maroon"
+					HorizontalContentAlignment="Center"
+					Background="Maroon">
+			</Button>
+			<Button Click="ClickRosyBrown"
+					Content="RosyBrown"
+					HorizontalContentAlignment="Center"
+					Background="RosyBrown">
+			</Button>
+			<Button Click="ClickLightPink"
+					Content="LightPink"
+					HorizontalContentAlignment="Center"
+					Background="LightPink">
+			</Button>
+		</StackPanel>
+		<GridSplitter Grid.Column="1" Background="Black"></GridSplitter>
+		<Canvas Grid.Column="2" Background="White" x:Name="squarePan"></Canvas>
+	</Grid>
 </Window>
