@@ -89,6 +89,6 @@
 			</Border>
 		</StackPanel>
 		<GridSplitter Grid.Column="1" Background="Black"/>
-		<Canvas Grid.Column="2" Background="White" x:Name="squarePan"/>
+		<Canvas Grid.Column="2" Background="Khaki" x:Name="squarePan"/>
 	</Grid>
 </Window>
