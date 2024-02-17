@@ -20,4 +20,9 @@ public partial class MainWindow : Window
             squarePan.Background = button.Background;
         }
     }
+    
+    public void ClickEvent(object sender, RoutedEventArgs args)
+    {
+        squarePan.Background = buttonKhaki.Background;
+    }
 }
