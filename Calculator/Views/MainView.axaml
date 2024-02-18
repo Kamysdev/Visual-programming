@@ -2,58 +2,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:con="clr-namespace:CalculatorLogic"
              xmlns:vm="clr-namespace:Calculator.ViewModels"
              mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="300"
-			 
              x:Class="Calculator.Views.MainView"
              x:DataType="vm:MainViewModel">
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainViewModel />
-    </Design.DataContext>
-	
+	<Border BorderBrush="#EB3BAF" BorderThickness="3" CornerRadius="15">
+		<Grid Margin="2" ColumnDefinitions="0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1*" RowDefinitions="30 0.1* 0.1* 0.1* 0.1* 0.1*">
+			<TextBlock Text="{Binding ValStr, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="7"/>
 
-	<Grid ColumnDefinitions="0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1*" RowDefinitions="0.1* 0.1* 0.1* 0.1* 0.1*">
-		<TextBox Grid.ColumnSpan="7"/>
-		
-		<Button Classes="Numbers" Content="7" Grid.Row="1"/>
-		<Button Classes="Numbers" Content="4" Grid.Row="2"/>
-		<Button Classes="Numbers" Content="1" Grid.Row="3"/>
-		<Button Classes="Numbers" Content="0" Grid.Row="4" Grid.ColumnSpan="2"/>
-		
-		<Button Classes="Numbers" Content="8" Grid.Row="1" Grid.Column="1"/>
-		<Button Classes="Numbers" Content="5" Grid.Row="2" Grid.Column="1"/>
-		<Button Classes="Numbers" Content="2" Grid.Row="3" Grid.Column="1"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="7" Classes="Numbers" Content="7" Grid.Row="2"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="4" Classes="Numbers" Content="4" Grid.Row="3"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="1" Classes="Numbers" Content="1" Grid.Row="4"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="0" Classes="Numbers" Content="0" Grid.Row="5" Grid.ColumnSpan="2"/>
 
-		<Button Classes="Numbers" Content="9" Grid.Row="1" Grid.Column="2"/>
-		<Button Classes="Numbers" Content="6" Grid.Row="2" Grid.Column="2"/>
-		<Button Classes="Numbers" Content="3" Grid.Row="3" Grid.Column="2"/>
-		<Button Classes="Numbers" Content="." Grid.Row="4" Grid.Column="2"/>
-		
-		<Button Classes="Numbers" Content="+" Grid.Row="1" Grid.Column="3"/>
-		<Button Classes="Numbers" Content="-" Grid.Row="2" Grid.Column="3"/>
-		<Button Classes="Numbers" Content="X" Grid.Row="3" Grid.Column="3"/>
-		<Button Classes="Numbers" Content="/" Grid.Row="4" Grid.Column="3"/>
+			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="8" Grid.Row="2" Grid.Column="1"/>
+			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="5" Grid.Row="3" Grid.Column="1"/>
+			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="2" Grid.Row="4" Grid.Column="1"/>
 
-		<Button Classes="Numbers" Content="^" Grid.Row="1" Grid.Column="4"/>
-		<Button Classes="Numbers" Content="lg" Grid.Row="2" Grid.Column="4"/>
-		<Button Classes="Numbers" FontSize="18" Content="mod" Grid.Row="3" Grid.Column="4"/>
-		<Button Classes="Numbers" Content="!" Grid.Row="4" Grid.Column="4"/>
+			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="9" Grid.Row="2" Grid.Column="2"/>
+			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="6" Grid.Row="3" Grid.Column="2"/>
+			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="3" Grid.Row="4" Grid.Column="2"/>
+			<Button Classes="Numbers" Content="." Grid.Row="5" Grid.Column="2"/>
 
-		<Button Classes="Numbers" Content="Pi" Grid.Row="1" Grid.Column="5"/>
-		<Button Classes="Numbers" Content="e" Grid.Row="2" Grid.Column="5"/>
-		<Button Classes="Numbers" Content="ln" Grid.Row="3" Grid.Column="5"/>
-		<Button Classes="Numbers" Content="sin" Grid.Row="4" Grid.Column="5"/>
-		
-		<Button Classes="Numbers" FontSize="14" Content="floor" Grid.Row="1" Grid.Column="6"/>
-		<Button Classes="Numbers" FontSize="18" Content="celi" Grid.Row="2" Grid.Column="6"/>
-		<Button Classes="Numbers" FontSize="18" Content="tan" Grid.Row="3" Grid.Column="6"/>
-		<Button Classes="Numbers" FontSize="18" Content="cos" Grid.Row="4" Grid.Column="6"/>
-		
-		<Button Classes="Numbers" Content="bsc" Grid.Row="0" Grid.Column="7"/>
-		<Button Classes="Numbers" Content="C" Grid.Row="1" Grid.Column="7"/>
-		<Button Classes="Numbers" Content="=" Grid.Row="2" Grid.Column="7" Grid.RowSpan="3"/>
-	</Grid>
+			<Button Command="{Binding Calc}" CommandParameter="+" Classes="Numbers" Content="+" Grid.Row="2" Grid.Column="3"/>
+			<Button Command="{Binding Calc}" CommandParameter="-" Classes="Numbers" Content="-" Grid.Row="3" Grid.Column="3"/>
+			<Button Command="{Binding Calc}" Classes="Numbers" Content="X" Grid.Row="4" Grid.Column="3"/>
+			<Button Command="{Binding Calc}" CommandParameter="/" Classes="Numbers" Content="/" Grid.Row="5" Grid.Column="3"/>
+
+			<Button Classes="Numbers" Content="^" Grid.Row="2" Grid.Column="4"/>
+			<Button Classes="Numbers" Content="lg" Grid.Row="3" Grid.Column="4"/>
+			<Button Classes="Numbers" FontSize="18" Content="mod" Grid.Row="4" Grid.Column="4"/>
+			<Button Classes="Numbers" Content="!" Grid.Row="5" Grid.Column="4"/>
+
+			<Button Classes="Numbers" Content="Pi" Grid.Row="2" Grid.Column="5"/>
+			<Button Classes="Numbers" Content="e" Grid.Row="3" Grid.Column="5"/>
+			<Button Classes="Numbers" Content="ln" Grid.Row="4" Grid.Column="5"/>
+			<Button Classes="Numbers" Content="sin" Grid.Row="5" Grid.Column="5"/>
+
+			<Button Classes="Numbers" FontSize="14" Content="floor" Grid.Row="2" Grid.Column="6"/>
+			<Button Classes="Numbers" FontSize="18" Content="celi" Grid.Row="3" Grid.Column="6"/>
+			<Button Classes="Numbers" FontSize="18" Content="tan" Grid.Row="4" Grid.Column="6"/>
+			<Button Classes="Numbers" FontSize="18" Content="cos" Grid.Row="5" Grid.Column="6"/>
+
+			<Button Classes="Numbers" Content="bsc" Grid.Row="1" Grid.Column="7"/>
+			<Button Classes="Numbers" Content="C" Grid.Row="2" Grid.Column="7"/>
+			<Button Classes="Numbers" Content="=" Grid.Row="3" Grid.Column="7" Grid.RowSpan="3"/>
+		</Grid>
+	</Border>
   
 </UserControl>

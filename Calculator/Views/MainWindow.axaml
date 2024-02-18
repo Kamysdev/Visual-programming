@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Calculator.Views"
-        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="300"
-        Width="480" Height="300"
-		Background="Black"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="320"
+        Width="500" Height="320"
+		MaxHeight="320" MaxWidth="500"
+		MinHeight="320" MinWidth="500"
+		Background="Transparent"
 		x:Class="Calculator.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Calculator">
-
+	
 	<Window.Styles>
 		<Style Selector="Button.Numbers">
 			<Setter Property="FontFamily" Value="/Assets/Fonts/Knewave-Regular.ttf#Knewave"/>
@@ -26,21 +28,18 @@
 			<Setter Property="BorderThickness" Value="3"/>
 			<Setter Property="Margin" Value="2"/>
 		</Style>
-		<Style Selector="Button:pointerover.Number">
+		<Style Selector="Button:pointerover">
 			<Setter Property="Background" Value="#EB3BAF"/>
 			<Setter Property="BorderBrush" Value="Red"/>
 		</Style>
-		<Style Selector="TextBox">
+		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="/Assets/Fonts/Knewave-Regular.ttf#Knewave"/>
-			<Setter Property="FontSize" Value="32"/>
-			<Setter Property="Background" Value="White"/>
+			<Setter Property="FontSize" Value="26"/>
+			<Setter Property="Background" Value="rgba(0, 0, 0, 0)"/>
 			<Setter	Property="Foreground" Value="#EB3BAF"/>
-			<Setter Property="CornerRadius" Value="15"/>
-			<Setter Property="BorderBrush" Value="#EB3BAF"/>
-			<Setter Property="BorderThickness" Value="3"/>
+			<Setter Property="TextAlignment" Value="Right"/>
 			<Setter Property="Margin" Value="2"/>
 		</Style>
 	</Window.Styles>
-	
-    <views:MainView />
+	<views:MainView />
 </Window>
