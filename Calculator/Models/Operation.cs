@@ -1,11 +1,20 @@
 ﻿namespace Calculator.Models
 {
-    public enum Operation
+    public enum Operators
     {
-        Add,
-        Subtract,
-        Multiply,
-        Divide,
-        Result
+        MUL,
+        PLUS,
+        MINUS,
+        DIV,
+        MOD,
+        FACTORIAL,
+        POW,
+        LG,
+        LN,
+        SIN,
+        COS,
+        TAN,
+        FLOOR,
+        CEIL
     }
 }

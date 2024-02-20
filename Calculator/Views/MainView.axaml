@@ -9,45 +9,46 @@
              x:DataType="vm:MainViewModel">
 	<Border BorderBrush="#EB3BAF" BorderThickness="3" CornerRadius="15">
 		<Grid Margin="2" ColumnDefinitions="0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1*" RowDefinitions="30 0.1* 0.1* 0.1* 0.1* 0.1*">
-			<TextBlock Text="{Binding ValStr, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="7"/>
+			<Border BorderBrush="White" BorderThickness="3" CornerRadius="15" Grid.Row="1" Grid.ColumnSpan="8">
+				<TextBlock Margin="5" Text="{Binding ValStr, Mode=TwoWay}"/>
+			</Border>
 
 			<Button Command="{Binding AppendDigit}" CommandParameter="7" Classes="Numbers" Content="7" Grid.Row="2"/>
 			<Button Command="{Binding AppendDigit}" CommandParameter="4" Classes="Numbers" Content="4" Grid.Row="3"/>
 			<Button Command="{Binding AppendDigit}" CommandParameter="1" Classes="Numbers" Content="1" Grid.Row="4"/>
 			<Button Command="{Binding AppendDigit}" CommandParameter="0" Classes="Numbers" Content="0" Grid.Row="5" Grid.ColumnSpan="2"/>
 
-			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="8" Grid.Row="2" Grid.Column="1"/>
-			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="5" Grid.Row="3" Grid.Column="1"/>
-			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="2" Grid.Row="4" Grid.Column="1"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="8" Classes="Numbers" Content="8" Grid.Row="2" Grid.Column="1"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="5" Classes="Numbers" Content="5" Grid.Row="3" Grid.Column="1"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="2" Classes="Numbers" Content="2" Grid.Row="4" Grid.Column="1"/>
 
-			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="9" Grid.Row="2" Grid.Column="2"/>
-			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="6" Grid.Row="3" Grid.Column="2"/>
-			<Button Command="{Binding AppendDigit}" Classes="Numbers" Content="3" Grid.Row="4" Grid.Column="2"/>
-			<Button Classes="Numbers" Content="." Grid.Row="5" Grid.Column="2"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="9" Classes="Numbers" Content="9" Grid.Row="2" Grid.Column="2"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="6" Classes="Numbers" Content="6" Grid.Row="3" Grid.Column="2"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="3" Classes="Numbers" Content="3" Grid.Row="4" Grid.Column="2"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="," Classes="Numbers" Content="." Grid.Row="5" Grid.Column="2"/>
 
 			<Button Command="{Binding Calc}" CommandParameter="+" Classes="Numbers" Content="+" Grid.Row="2" Grid.Column="3"/>
 			<Button Command="{Binding Calc}" CommandParameter="-" Classes="Numbers" Content="-" Grid.Row="3" Grid.Column="3"/>
-			<Button Command="{Binding Calc}" Classes="Numbers" Content="X" Grid.Row="4" Grid.Column="3"/>
+			<Button Command="{Binding Calc}" CommandParameter="*" Classes="Numbers" Content="X" Grid.Row="4" Grid.Column="3"/>
 			<Button Command="{Binding Calc}" CommandParameter="/" Classes="Numbers" Content="/" Grid.Row="5" Grid.Column="3"/>
 
-			<Button Classes="Numbers" Content="^" Grid.Row="2" Grid.Column="4"/>
-			<Button Classes="Numbers" Content="lg" Grid.Row="3" Grid.Column="4"/>
-			<Button Classes="Numbers" FontSize="18" Content="mod" Grid.Row="4" Grid.Column="4"/>
-			<Button Classes="Numbers" Content="!" Grid.Row="5" Grid.Column="4"/>
+			<Button Command="{Binding Calc}" CommandParameter="x^y" Classes="Numbers" Content="^" Grid.Row="2" Grid.Column="4"/>
+			<Button Command="{Binding Calc}" CommandParameter="lg" Classes="Numbers" Content="lg" Grid.Row="3" Grid.Column="4"/>
+			<Button Command="{Binding Calc}" CommandParameter="mod" Classes="Numbers" FontSize="18" Content="mod" Grid.Row="4" Grid.Column="4"/>
+			<Button Command="{Binding Calc}" CommandParameter="n!" Classes="Numbers" Content="!" Grid.Row="5" Grid.Column="4"/>
 
 			<Button Classes="Numbers" Content="Pi" Grid.Row="2" Grid.Column="5"/>
 			<Button Classes="Numbers" Content="e" Grid.Row="3" Grid.Column="5"/>
-			<Button Classes="Numbers" Content="ln" Grid.Row="4" Grid.Column="5"/>
-			<Button Classes="Numbers" Content="sin" Grid.Row="5" Grid.Column="5"/>
+			<Button Command="{Binding Calc}" CommandParameter="ln" Classes="Numbers" Content="ln" Grid.Row="4" Grid.Column="5"/>
+			<Button Command="{Binding Calc}" CommandParameter="sin" Classes="Numbers" Content="sin" Grid.Row="5" Grid.Column="5"/>
 
-			<Button Classes="Numbers" FontSize="14" Content="floor" Grid.Row="2" Grid.Column="6"/>
-			<Button Classes="Numbers" FontSize="18" Content="celi" Grid.Row="3" Grid.Column="6"/>
-			<Button Classes="Numbers" FontSize="18" Content="tan" Grid.Row="4" Grid.Column="6"/>
-			<Button Classes="Numbers" FontSize="18" Content="cos" Grid.Row="5" Grid.Column="6"/>
+			<Button Command="{Binding Calc}" CommandParameter="floor" Classes="Numbers" FontSize="14" Content="floor" Grid.Row="2" Grid.Column="6"/>
+			<Button Command="{Binding Calc}" CommandParameter="celi" Classes="Numbers" FontSize="18" Content="celi" Grid.Row="3" Grid.Column="6"/>
+			<Button Command="{Binding Calc}" CommandParameter="tan" Classes="Numbers" FontSize="18" Content="tan" Grid.Row="4" Grid.Column="6"/>
+			<Button Command="{Binding Calc}" CommandParameter="cos" Classes="Numbers" FontSize="18" Content="cos" Grid.Row="5" Grid.Column="6"/>
 
-			<Button Classes="Numbers" Content="bsc" Grid.Row="1" Grid.Column="7"/>
-			<Button Classes="Numbers" Content="C" Grid.Row="2" Grid.Column="7"/>
-			<Button Classes="Numbers" Content="=" Grid.Row="3" Grid.Column="7" Grid.RowSpan="3"/>
+			<Button Command="{Binding Clear}" Classes="Numbers" Content="C" Grid.Row="2" Grid.Column="7"/>
+			<Button Command="{Binding Calc}" Classes="Numbers" CommandParameter="=" Content="=" Grid.Row="3" Grid.Column="7" Grid.RowSpan="3"/>
 		</Grid>
 	</Border>
   

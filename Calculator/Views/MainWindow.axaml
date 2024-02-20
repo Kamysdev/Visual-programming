@@ -34,11 +34,9 @@
 		</Style>
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="/Assets/Fonts/Knewave-Regular.ttf#Knewave"/>
-			<Setter Property="FontSize" Value="26"/>
-			<Setter Property="Background" Value="rgba(0, 0, 0, 0)"/>
-			<Setter	Property="Foreground" Value="#EB3BAF"/>
-			<Setter Property="TextAlignment" Value="Right"/>
-			<Setter Property="Margin" Value="2"/>
+			<Setter Property="FontSize" Value="24"/>
+			<Setter Property="Foreground" Value="#EB3BAF"/>
+			<Setter Property="Background" Value="Transparent"/>
 		</Style>
 	</Window.Styles>
 	<views:MainView />

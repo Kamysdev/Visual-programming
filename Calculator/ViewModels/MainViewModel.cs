@@ -3,26 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using Calculator.Models;
 
 namespace Calculator.ViewModels;
-
-public enum Operators
-{
-    MUL,
-    PLUS,
-    MINUS,
-    DIV,
-    MOD,
-    FACTORIAL,
-    POW,
-    LG,
-    LN,
-    SIN,
-    COS,
-    TAN,
-    FLOOR,
-    CEIL
-}
 
 class Calculator
 {
@@ -94,6 +77,9 @@ public class MainViewModel : INotifyPropertyChanged
     private string _lastOp = "";
     private string _valStr = "";
     private string _resultStr = "";
+
+    private bool addDot = false;
+
     public string ValStr
     {
         get => _valStr;
@@ -123,6 +109,35 @@ public class MainViewModel : INotifyPropertyChanged
         ResultStr = "";
         _calc.Clear();
     }
+
+    public void RemoveDigit(object? param)
+    {
+        if (param == null || param is not string) return;
+
+        if (!string.IsNullOrEmpty(ValStr))
+        {
+            ValStr.Remove(ValStr.Length - 1);
+        }
+    }
+
+    public void AppendDigit(object? param)
+    {
+        if (param == null || param is not string) return;
+        string operand = (string)param;
+
+        if (operand != ",")
+        {
+            ValStr += operand;
+            return;
+        }
+        if (operand == "," && !addDot)
+        {
+            ValStr += operand;
+            addDot = true;
+        }
+
+    }
+
     public void Calc(object? param)
     {
         if (param == null || param is not string) return;
@@ -143,34 +158,47 @@ public class MainViewModel : INotifyPropertyChanged
             {
                 case "*":
                     _calc.SetOperator(Operators.MUL);
+                    ValStr = "";
+                    addDot = false;
                     break;
                 case "+":
                     _calc.SetOperator(Operators.PLUS);
+                    ValStr = "";
+                    addDot = false;
                     break;
                 case "-":
                     _calc.SetOperator(Operators.MINUS);
+                    ValStr = "";
+                    addDot = false;
                     break;
                 case "/":
                     _calc.SetOperator(Operators.DIV);
+                    ValStr = "";
+                    addDot = false;
                     break;
                 case "mod":
                     _calc.SetOperator(Operators.MOD);
+                    ValStr = "";
+                    addDot = false;
                     break;
                 case "x^y":
                     _calc.SetOperator(Operators.POW);
+                    ValStr = "";
+                    addDot = false;
                     break;
-                case "n!": _calc.SetOperator(Operators.FACTORIAL); break;
-                case "lg": _calc.SetOperator(Operators.LG); break;
-                case "ln": _calc.SetOperator(Operators.LN); break;
-                case "sin": _calc.SetOperator(Operators.SIN); break;
-                case "cos": _calc.SetOperator(Operators.COS); break;
-                case "tan": _calc.SetOperator(Operators.TAN); break;
-                case "floor": _calc.SetOperator(Operators.FLOOR); break;
-                case "ceil": _calc.SetOperator(Operators.CEIL); break;
+                case "n!": _calc.SetOperator(Operators.FACTORIAL); ValStr = ""; addDot = false; break;
+                case "lg": _calc.SetOperator(Operators.LG); ValStr = ""; addDot = false; break;
+                case "ln": _calc.SetOperator(Operators.LN); ValStr = ""; addDot = false; break;
+                case "sin": _calc.SetOperator(Operators.SIN); ValStr = ""; addDot = false; break;
+                case "cos": _calc.SetOperator(Operators.COS); ValStr = ""; addDot = false; break;
+                case "tan": _calc.SetOperator(Operators.TAN); ValStr = ""; addDot = false; break;
+                case "floor": _calc.SetOperator(Operators.FLOOR); ValStr = ""; addDot = false; break;
+                case "ceil": _calc.SetOperator(Operators.CEIL); ValStr = ""; addDot = false; break;
                 case "=":
                     {
                         ResultStr = _calc.Calculate(val).ToString();
                         ValStr = ResultStr;
+                        addDot = false;
                         break;
                     }
                 default:
@@ -182,9 +210,7 @@ public class MainViewModel : INotifyPropertyChanged
         {
             ResultStr = e.Message;
         }
-
     }
-
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
