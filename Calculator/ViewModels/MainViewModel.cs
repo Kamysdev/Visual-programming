@@ -107,6 +107,7 @@ public class MainViewModel : INotifyPropertyChanged
     {
         ValStr = "";
         ResultStr = "";
+        addDot = false;
         _calc.Clear();
     }
 
@@ -125,17 +126,36 @@ public class MainViewModel : INotifyPropertyChanged
         if (param == null || param is not string) return;
         string operand = (string)param;
 
-        if (operand != ",")
+        switch (operand)
         {
-            ValStr += operand;
-            return;
+            case "Pi":
+                ValStr = "3,14159265358980";
+                break;
+            case "e":
+                ValStr = "2,7182818284";
+                break;
+            case ",":
+                if (!addDot)
+                {
+                    ValStr += operand;
+                    addDot = true;
+                }
+                break;
+            default:
+                ValStr += operand;
+                break;
         }
-        if (operand == "," && !addDot)
+    }
+
+    private void MakeCalculate(double val)
+    {
+        ResultStr = _calc.Calculate(val).ToString();
+        ValStr = ResultStr;
+        addDot = false;
+        if (ValStr.Contains(","))
         {
-            ValStr += operand;
             addDot = true;
         }
-
     }
 
     public void Calc(object? param)
@@ -153,7 +173,6 @@ public class MainViewModel : INotifyPropertyChanged
 
         try
         {
-            //Rewrite to switch case
             switch (operand)
             {
                 case "*":
@@ -186,19 +205,19 @@ public class MainViewModel : INotifyPropertyChanged
                     ValStr = "";
                     addDot = false;
                     break;
-                case "n!": _calc.SetOperator(Operators.FACTORIAL); ValStr = ""; addDot = false; break;
-                case "lg": _calc.SetOperator(Operators.LG); ValStr = ""; addDot = false; break;
-                case "ln": _calc.SetOperator(Operators.LN); ValStr = ""; addDot = false; break;
-                case "sin": _calc.SetOperator(Operators.SIN); ValStr = ""; addDot = false; break;
-                case "cos": _calc.SetOperator(Operators.COS); ValStr = ""; addDot = false; break;
-                case "tan": _calc.SetOperator(Operators.TAN); ValStr = ""; addDot = false; break;
-                case "floor": _calc.SetOperator(Operators.FLOOR); ValStr = ""; addDot = false; break;
-                case "ceil": _calc.SetOperator(Operators.CEIL); ValStr = ""; addDot = false; break;
+                case "n!": _calc.SetOperator(Operators.FACTORIAL); 
+                    MakeCalculate(val);
+                    break;
+                case "lg": _calc.SetOperator(Operators.LG); MakeCalculate(val); break;
+                case "ln": _calc.SetOperator(Operators.LN); MakeCalculate(val); break;
+                case "sin": _calc.SetOperator(Operators.SIN); MakeCalculate(val); break;
+                case "cos": _calc.SetOperator(Operators.COS); MakeCalculate(val); break;
+                case "tan": _calc.SetOperator(Operators.TAN); MakeCalculate(val); break;
+                case "floor": _calc.SetOperator(Operators.FLOOR); MakeCalculate(val); break;
+                case "ceil": _calc.SetOperator(Operators.CEIL); MakeCalculate(val); break;
                 case "=":
                     {
-                        ResultStr = _calc.Calculate(val).ToString();
-                        ValStr = ResultStr;
-                        addDot = false;
+                        MakeCalculate(val);
                         break;
                     }
                 default:

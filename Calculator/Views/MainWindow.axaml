@@ -17,7 +17,7 @@
 		<Style Selector="Button.Numbers">
 			<Setter Property="FontFamily" Value="/Assets/Fonts/Knewave-Regular.ttf#Knewave"/>
 			<Setter Property="FontSize" Value="24"/>
-			<Setter Property="Background" Value="#EB3BAF"/>
+			<Setter Property="Background" Value="Olive"/>
 			<Setter	Property="Foreground" Value="White"/>
 			<Setter Property="HorizontalContentAlignment" Value="Center"/>
 			<Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -29,13 +29,13 @@
 			<Setter Property="Margin" Value="2"/>
 		</Style>
 		<Style Selector="Button:pointerover">
-			<Setter Property="Background" Value="#EB3BAF"/>
+			<Setter Property="Background" Value="Olive"/>
 			<Setter Property="BorderBrush" Value="Red"/>
 		</Style>
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="/Assets/Fonts/Knewave-Regular.ttf#Knewave"/>
 			<Setter Property="FontSize" Value="24"/>
-			<Setter Property="Foreground" Value="#EB3BAF"/>
+			<Setter Property="Foreground" Value="White"/>
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
 	</Window.Styles>

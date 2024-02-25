@@ -7,9 +7,9 @@
              mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="300"
              x:Class="Calculator.Views.MainView"
              x:DataType="vm:MainViewModel">
-	<Border BorderBrush="#EB3BAF" BorderThickness="3" CornerRadius="15">
+	<Border BorderBrush="Olive" BorderThickness="3" CornerRadius="15">
 		<Grid Margin="2" ColumnDefinitions="0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1* 0.1*" RowDefinitions="30 0.1* 0.1* 0.1* 0.1* 0.1*">
-			<Border BorderBrush="White" BorderThickness="3" CornerRadius="15" Grid.Row="1" Grid.ColumnSpan="8">
+			<Border Background="rgba(0, 0, 0, 0.5)" BorderBrush="White" BorderThickness="3" CornerRadius="15" Grid.Row="1" Grid.ColumnSpan="8">
 				<TextBlock Margin="5" Text="{Binding ValStr, Mode=TwoWay}"/>
 			</Border>
 
@@ -37,8 +37,8 @@
 			<Button Command="{Binding Calc}" CommandParameter="mod" Classes="Numbers" FontSize="18" Content="mod" Grid.Row="4" Grid.Column="4"/>
 			<Button Command="{Binding Calc}" CommandParameter="n!" Classes="Numbers" Content="!" Grid.Row="5" Grid.Column="4"/>
 
-			<Button Classes="Numbers" Content="Pi" Grid.Row="2" Grid.Column="5"/>
-			<Button Classes="Numbers" Content="e" Grid.Row="3" Grid.Column="5"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="Pi" Classes="Numbers" Content="Pi" Grid.Row="2" Grid.Column="5"/>
+			<Button Command="{Binding AppendDigit}" CommandParameter="e" Classes="Numbers" Content="e" Grid.Row="3" Grid.Column="5"/>
 			<Button Command="{Binding Calc}" CommandParameter="ln" Classes="Numbers" Content="ln" Grid.Row="4" Grid.Column="5"/>
 			<Button Command="{Binding Calc}" CommandParameter="sin" Classes="Numbers" Content="sin" Grid.Row="5" Grid.Column="5"/>
 
@@ -47,7 +47,7 @@
 			<Button Command="{Binding Calc}" CommandParameter="tan" Classes="Numbers" FontSize="18" Content="tan" Grid.Row="4" Grid.Column="6"/>
 			<Button Command="{Binding Calc}" CommandParameter="cos" Classes="Numbers" FontSize="18" Content="cos" Grid.Row="5" Grid.Column="6"/>
 
-			<Button Command="{Binding Clear}" Classes="Numbers" Content="C" Grid.Row="2" Grid.Column="7"/>
+			<Button Command="{Binding Clear}" CommandParameter="clear" Classes="Numbers" Content="C" Grid.Row="2" Grid.Column="7"/>
 			<Button Command="{Binding Calc}" Classes="Numbers" CommandParameter="=" Content="=" Grid.Row="3" Grid.Column="7" Grid.RowSpan="3"/>
 		</Grid>
 	</Border>
