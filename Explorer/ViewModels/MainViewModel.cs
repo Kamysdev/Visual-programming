@@ -10,13 +10,17 @@ namespace Explorer.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    public string FilePath {  get; set; }
+
     public ObservableCollection<EntityViewModel> FileDirectory { get; set; } = new ObservableCollection<EntityViewModel>();
 
-    public ICommand dClick { get; }
+    public EntityViewModel SelectedFile { get; set; }
+
+    public ICommand openCommand { get; }
 
     public MainViewModel() 
     {
-        dClick = new DeligateCommand(OpenFolder);
+        openCommand = new DeligateCommand(OpenFolder);
 
         foreach (var logicalDrive in Directory.GetLogicalDrives())
         {
@@ -24,10 +28,25 @@ public partial class MainViewModel : ViewModelBase
         }
     }
     
-    
     private void OpenFolder(object? obj)
     {
+        if (obj is DirectoryViewModel directoryViewModel) 
+        {
+            FilePath = directoryViewModel.Name;
 
+            FileDirectory.Clear();
+            var dirInfo = new DirectoryInfo(FilePath);
+
+            foreach (var directory in dirInfo.GetDirectories())
+            {
+                FileDirectory.Add(new DirectoryViewModel(directory));
+            }
+
+            foreach (var fileInfo in dirInfo.GetFiles())
+            {
+                FileDirectory.Add(new FileViewModel(fileInfo));
+            }
+        }
     }
 
 }

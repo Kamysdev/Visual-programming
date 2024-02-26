@@ -21,7 +21,7 @@ public partial class MainViewModel
             return true;
         }
 
-        public void Execute(object? parameter)
+        public void Execute(object parameter)
         {
             _open?.Invoke(parameter);
         }
