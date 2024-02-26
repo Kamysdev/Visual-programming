@@ -6,7 +6,8 @@
         xmlns:views="clr-namespace:Explorer.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Explorer.Views.MainWindow"
+		Background="Gray"
         Icon="/Assets/avalonia-logo.ico"
         Title="Explorer">
-        <views:MainView />
+	<views:MainView />
 </Window>
