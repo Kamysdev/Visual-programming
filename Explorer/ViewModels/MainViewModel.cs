@@ -12,25 +12,27 @@ public partial class MainViewModel : ViewModelBase
 {
     public string FilePath {  get; set; }
 
-    public ObservableCollection<EntityViewModel> FileDirectory { get; set; } = new ObservableCollection<EntityViewModel>();
+    public ObservableCollection<EntityViewModel> FileDirectory { get; set; } = 
+        new ObservableCollection<EntityViewModel>();
 
-    public EntityViewModel SelectedFile { get; set; }
+    public EntityViewModel? SelectedFile { get; set; }
 
-    public ICommand openCommand { get; }
+    public ICommand OpenCommand { get; }
 
     public MainViewModel() 
     {
-        openCommand = new DeligateCommand(OpenFolder);
+        OpenCommand = new DeligateCommand(OpenFolder);
 
         foreach (var logicalDrive in Directory.GetLogicalDrives())
         {
             FileDirectory.Add(new DirectoryViewModel(logicalDrive));
         }
     }
-    
-    private void OpenFolder(object? obj)
+
+
+    private void OpenFolder(object parameter)
     {
-        if (obj is DirectoryViewModel directoryViewModel) 
+        if (parameter is DirectoryViewModel directoryViewModel) 
         {
             FilePath = directoryViewModel.Name;
 
@@ -48,5 +50,4 @@ public partial class MainViewModel : ViewModelBase
             }
         }
     }
-
 }
