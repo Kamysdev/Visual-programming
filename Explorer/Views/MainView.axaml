@@ -6,6 +6,7 @@
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:vm="clr-namespace:Explorer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 Background="#2B2B2B"
              x:Class="Explorer.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
@@ -15,7 +16,7 @@
   </Design.DataContext>
 
 	<Grid RowDefinitions="30, auto">
-		<Button Command="{Binding GoBack}" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+		<Button Content="..." Command="{Binding GoBack}" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
 		<ListBox Grid.Row="1" 
 				 Name="list" 
 				 ItemsSource="{Binding FileDirectory}" 
