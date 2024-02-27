@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Avalonia.Controls;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace Explorer.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public string FilePath {  get; set; }
+    public string FilePath { get; set; }
 
     public ObservableCollection<EntityViewModel> FileDirectory { get; set; } = 
         new ObservableCollection<EntityViewModel>();
@@ -29,25 +31,70 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
+    public void GoBack(object parameter)
+    {
+        if (FilePath[FilePath.Length - 1] == '\\')
+        {
+            FilePath = FilePath.Remove(FilePath.Length - 1);
+            for (int i = FilePath.Length - 1; i >= 0; i--)
+            {
+                if (Convert.ToString(FilePath[i]) == "\\")
+                {
+                    break;
+                }
+                FilePath = FilePath.Remove(i);
+            }
+
+        }
+
+        for (int i = FilePath.Length - 1; i >= 0; i--)
+        {
+            if (Convert.ToString(FilePath[i]) == "\\")
+            {
+                break;
+            }
+            FilePath = FilePath.Remove(i);
+        }
+
+        if (FilePath.Length == 0)
+        {
+            FileDirectory.Clear();
+
+            foreach (var logicalDrive in Directory.GetLogicalDrives())
+            {
+                FileDirectory.Add(new DirectoryViewModel(logicalDrive));
+            }
+            return;
+        }
+
+        MoveInFolders();
+        return;
+
+    }
 
     private void OpenFolder(object parameter)
     {
         if (parameter is DirectoryViewModel directoryViewModel) 
         {
-            FilePath = directoryViewModel.Name;
+            FilePath = directoryViewModel.FullName;
 
-            FileDirectory.Clear();
-            var dirInfo = new DirectoryInfo(FilePath);
+            MoveInFolders();
+        }
+    }
 
-            foreach (var directory in dirInfo.GetDirectories())
-            {
-                FileDirectory.Add(new DirectoryViewModel(directory));
-            }
+    private void MoveInFolders()
+    {
+        FileDirectory.Clear();
+        var dirInfo = new DirectoryInfo(FilePath);
 
-            foreach (var fileInfo in dirInfo.GetFiles())
-            {
-                FileDirectory.Add(new FileViewModel(fileInfo));
-            }
+        foreach (var directory in dirInfo.GetDirectories())
+        {
+            FileDirectory.Add(new DirectoryViewModel(directory));
+        }
+
+        foreach (var fileInfo in dirInfo.GetFiles())
+        {
+            FileDirectory.Add(new FileViewModel(fileInfo));
         }
     }
 }

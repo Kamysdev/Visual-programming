@@ -10,6 +10,7 @@ public sealed class FileViewModel : EntityViewModel
 
     public FileViewModel(FileInfo fileInfo) : base(fileInfo.Name)
     {
+        IsFolder = false;
         FullName = fileInfo.FullName;
     }
 
