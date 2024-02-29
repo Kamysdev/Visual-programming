@@ -15,9 +15,23 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-	<Grid RowDefinitions="30, auto">
-		<Button Content="..." Command="{Binding GoBack}" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
-		<ListBox Grid.Row="1" 
+	<Grid RowDefinitions="auto, 30, *">
+		<Menu>
+			<MenuItem Header="_File">
+				<MenuItem Header="_Open..."/>
+				<Separator/>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+				<MenuItem Header="_Exit"/>
+				<Separator/>
+			</MenuItem>
+		</Menu>
+		<StackPanel Height="30" Grid.Row="1" Orientation="Horizontal">
+			<Button Command="{Binding GoUp}" Classes="Navigation"><Image Source="avares://Explorer/Assets/arrow-left.ico"></Image></Button>
+			<Button Command="{Binding GoBack}" Classes="Navigation"><Image Source="avares://Explorer/Assets/arrow-right.ico"></Image></Button>
+		</StackPanel>
+		
+		<ListBox Grid.Row="2" 
 				 Name="list" 
 				 ItemsSource="{Binding FileDirectory}" 
 				 SelectedItem="{Binding SelectedFile}">
@@ -31,8 +45,9 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Grid ColumnDefinitions="15, auto" RowDefinitions="30, auto">
-						<Image Grid.Row="0" Grid.Column="0" Source="avares://Explorer/Assets/Folder-Yellow.ico"></Image>
-						<TextBlock Grid.Row="0" Margin="15 0 0 0" Grid.Column="1" Text="{Binding Name}"/>
+						<Image IsVisible="{Binding IsFolder}" Grid.Row="0" Grid.Column="0" Source="avares://Explorer/Assets/Folder-Yellow.ico"></Image>
+						<Image IsVisible="{Binding !IsFolder}" Grid.Row="0" Grid.Column="0" Source="avares://Explorer/Assets/Documents.ico"></Image>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="15 0 0 0" Text="{Binding Name}"/>
 					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

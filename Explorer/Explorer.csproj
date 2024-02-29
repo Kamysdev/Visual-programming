@@ -10,6 +10,15 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\System\**" />
+    <AvaloniaXaml Remove="Assets\System\**" />
+    <Compile Remove="Assets\System\**" />
+    <EmbeddedResource Remove="Assets\System\**" />
+    <None Remove="Assets\System\**" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
