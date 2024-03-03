@@ -36,6 +36,9 @@ public partial class MainViewModel : BaseViewModel
 
     public Bitmap _SeeCurrentImageResult { get; set; }
 
+    private List<string> formats = [".png", ".jpg", ".jpeg", ".bmp", ".ico", ".gif"];
+
+
     public ICommand OpenCommand { get; }
     public ICommand ImageCommand { get; }
 
@@ -162,8 +165,11 @@ public partial class MainViewModel : BaseViewModel
         {
             foreach (var fileInfo in dirInfo.GetFiles())
             {
-                if (fileInfo.Name.EndsWith(".png"))
-                    FileDirectory.Add(new FileViewModel(fileInfo));
+                foreach (var format in formats)
+                {
+                    if (fileInfo.Name.EndsWith(format))
+                        FileDirectory.Add(new FileViewModel(fileInfo));
+                }
             }
         }
         catch
@@ -171,6 +177,7 @@ public partial class MainViewModel : BaseViewModel
 
         }
     }
+
 
     private void ReloadEntity()
     {
