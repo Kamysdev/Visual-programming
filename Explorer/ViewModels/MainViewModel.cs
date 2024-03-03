@@ -47,7 +47,7 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    public void GoUp(object parameter)
+    public void GoUp()
     {
         LastFilePath = FilePath;
 
