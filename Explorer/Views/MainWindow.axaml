@@ -7,8 +7,9 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Explorer.Views.MainWindow"
         Icon="/Assets/Folder-Yellow.ico"
-        Title="Explorer">
-        <views:MainView />
+        Title="Explorer"
+		Background="#2B2B2B">
+	<views:MainView />
 
 	<Window.Styles>
 		<Style Selector="Button.Navigation">
@@ -17,7 +18,16 @@
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
 		<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-		</Style> 
+		</Style>
+		<Style Selector="MenuItem">
+			<Setter Property="FontWeight" Value="800"/>
+		</Style>
+		<Style Selector="Button:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="Purple"></Setter>
+		</Style>
+		<Style Selector="ListBoxItem">
+			<Setter Property="ToolTip.Tip" Value="{Binding FullName}"/>
+		</Style>
 	</Window.Styles>
-	
+
 </Window>

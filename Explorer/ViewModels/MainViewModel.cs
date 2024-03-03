@@ -1,24 +1,22 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Media;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Explorer.ViewModels;
 
-public partial class MainViewModel : ViewModelBase
+public partial class MainViewModel : BaseViewModel
 {
     public string FilePath { get; set; }
 
     public string LastFilePath { get; set; }
 
-    public ObservableCollection<EntityViewModel> FileDirectory { get; set; } = 
-        new ObservableCollection<EntityViewModel>();
+    public ObservableCollection<EntityViewModel> FileDirectory 
+    {
+        get;
+        set;
+    } = [];
 
     public EntityViewModel? SelectedFile { get; set; }
 
@@ -28,10 +26,7 @@ public partial class MainViewModel : ViewModelBase
     {
         OpenCommand = new DeligateCommand(OpenFolder);
 
-        foreach (var logicalDrive in Directory.GetLogicalDrives())
-        {
-            FileDirectory.Add(new DirectoryViewModel(logicalDrive));
-        }
+        GetLogicDrives();
     }
 
     public void GoBack()
@@ -56,7 +51,7 @@ public partial class MainViewModel : ViewModelBase
             return;
         }
 
-        if (FilePath[FilePath.Length - 1] == '\\')
+        if (FilePath[^1] == '\\')
         {
             FilePath = FilePath.Remove(FilePath.Length - 1);
             for (int i = FilePath.Length - 1; i >= 0; i--)
@@ -114,14 +109,33 @@ public partial class MainViewModel : ViewModelBase
         FileDirectory.Clear();
         var dirInfo = new DirectoryInfo(movablePath);
 
-        foreach (var directory in dirInfo.GetDirectories())
+        try
         {
-            FileDirectory.Add(new DirectoryViewModel(directory));
+            foreach (var directory in dirInfo.GetDirectories())
+            {
+                FileDirectory.Add(new DirectoryViewModel(directory));
+            }
         }
+        catch
+        {
 
-        foreach (var fileInfo in dirInfo.GetFiles())
-        {
-            FileDirectory.Add(new FileViewModel(fileInfo));
         }
+        
+        try
+        {
+            foreach (var fileInfo in dirInfo.GetFiles())
+            {
+                FileDirectory.Add(new FileViewModel(fileInfo));
+            }
+        }
+        catch
+        {
+
+        }
+    }
+
+    private void ReloadEntity()
+    {
+        MoveInFolders(FilePath);
     }
 }

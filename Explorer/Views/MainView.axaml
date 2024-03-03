@@ -6,7 +6,7 @@
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:vm="clr-namespace:Explorer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 Background="#2B2B2B"
+
              x:Class="Explorer.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
@@ -15,47 +15,51 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-	<Grid RowDefinitions="auto, 30, *">
-		<Menu>
-			<MenuItem Header="_File">
-				<MenuItem Header="_Open..."/>
-				<Separator/>
-			</MenuItem>
-			<MenuItem Header="_Edit">
-				<MenuItem Header="_Exit"/>
-				<Separator/>
-			</MenuItem>
-		</Menu>
-		<StackPanel Height="30" Grid.Row="1" Orientation="Horizontal">
-			<Button Command="{Binding GoUp}" Classes="Navigation"><Image Source="avares://Explorer/Assets/arrow-left.ico"></Image></Button>
-			<Button Command="{Binding GoBack}" Classes="Navigation"><Image Source="avares://Explorer/Assets/arrow-right.ico"></Image></Button>
-		</StackPanel>
-		
-		<ListBox Grid.Row="2" 
-				 Name="list" 
-				 ItemsSource="{Binding FileDirectory}" 
-				 SelectedItem="{Binding SelectedFile}">
-			<i:Interaction.Behaviors>
-				<ia:EventTriggerBehavior EventName="DoubleTapped">
-					<ia:InvokeCommandAction Command="{Binding OpenCommand}"
-										    CommandParameter="{Binding #list.SelectedItem}"/>
-				</ia:EventTriggerBehavior>
-			</i:Interaction.Behaviors>
+	<Border BorderThickness="4" BorderBrush="White">
+		<Grid RowDefinitions="30, auto, 30, *" ColumnDefinitions="0.5* 0.5*">
+			<Menu Grid.Row="1">
+				<MenuItem Header="_File">
+					<MenuItem Header="_Open..."/>
+					<Separator/>
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Header="_Exit"/>
+					<Separator/>
+				</MenuItem>
+			</Menu>
+			<StackPanel Height="30" Grid.Row="2" Orientation="Horizontal">
+				<Button Command="{Binding GoUp}" Classes="Navigation">
+					<Image Source="avares://Explorer/Assets/arrow-left.ico"></Image>
+				</Button>
+				<Button Command="{Binding GoBack}" Classes="Navigation">
+					<Image Source="avares://Explorer/Assets/arrow-right.ico"></Image>
+				</Button>
+			</StackPanel>
 
-			<ListBox.Resources>
-				<vm:EntityToIcoConventer x:Key="FileEntityResource"></vm:EntityToIcoConventer>
-			</ListBox.Resources>
-			
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid ColumnDefinitions="15, auto" RowDefinitions="30, auto">
-						<Image Grid.Row="0" Grid.Column="0" Source="{Binding ., Converter={StaticResource FileEntityResource} }"></Image>
-						<TextBlock Grid.Row="0" Grid.Column="1" Margin="15 0 0 0" Text="{Binding Name}"/>
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-			
-		</ListBox>
-	</Grid>
+			<ListBox Grid.Row="3"
+					 Name="list"
+					 ItemsSource="{Binding FileDirectory}"
+					 SelectedItem="{Binding SelectedFile}">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="DoubleTapped">
+						<ia:InvokeCommandAction Command="{Binding OpenCommand}"
+												CommandParameter="{Binding #list.SelectedItem}"/>
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+				<ListBox.Resources>
+					<vm:EntityToIcoConventer x:Key="FileEntityResource"></vm:EntityToIcoConventer>
+				</ListBox.Resources>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="15, auto" RowDefinitions="30, auto">
+							<Image Grid.Row="0" Grid.Column="0" Source="{Binding ., Converter={StaticResource FileEntityResource} }"></Image>
+							<TextBlock Grid.Row="0" Grid.Column="1" Margin="15 0 0 0" Text="{Binding Name}"/>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+	</Border>
 	
+
 </UserControl>
