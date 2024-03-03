@@ -7,11 +7,11 @@ public partial class MainViewModel
 {
     public class DeligateCommand : ICommand
     {
-        private readonly Action<object> _open;
+        private readonly Action<object> _act;
 
-        public DeligateCommand(Action<object> open) 
+        public DeligateCommand(Action<object> action) 
         {
-            _open = open;
+            _act = action;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -23,7 +23,7 @@ public partial class MainViewModel
 
         public void Execute(object? parameter)
         {
-            _open?.Invoke(parameter);
+            _act?.Invoke(parameter);
         }
     }
 

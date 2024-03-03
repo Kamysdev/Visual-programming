@@ -1,4 +1,6 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Models;
@@ -26,11 +28,21 @@ public partial class MainViewModel : BaseViewModel
 
     public EntityViewModel? SelectedFile { get; set; }
 
+    public Bitmap SeeCurrentImageResult 
+    {
+        get => _SeeCurrentImageResult; 
+        set { _SeeCurrentImageResult = value; OnPropertyChanged(nameof(SeeCurrentImageResult)); }
+    }
+
+    public Bitmap _SeeCurrentImageResult { get; set; }
+
     public ICommand OpenCommand { get; }
+    public ICommand ImageCommand { get; }
 
     public MainViewModel() 
     {
         OpenCommand = new DeligateCommand(OpenFolder);
+        ImageCommand = new DeligateCommand(OpenImage);
 
         GetLogicDrives();
     }
@@ -150,7 +162,8 @@ public partial class MainViewModel : BaseViewModel
         {
             foreach (var fileInfo in dirInfo.GetFiles())
             {
-                FileDirectory.Add(new FileViewModel(fileInfo));
+                if (fileInfo.Name.EndsWith(".png"))
+                    FileDirectory.Add(new FileViewModel(fileInfo));
             }
         }
         catch
@@ -162,5 +175,13 @@ public partial class MainViewModel : BaseViewModel
     private void ReloadEntity()
     {
         MoveInFolders(FilePath);
+    }
+
+    public void OpenImage(object parameter)
+    {
+        if (parameter is FileViewModel fileViewModel)
+        {
+            SeeCurrentImageResult = new Bitmap(fileViewModel.FullName);
+        }
     }
 }

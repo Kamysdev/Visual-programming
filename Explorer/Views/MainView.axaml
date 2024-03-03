@@ -46,6 +46,12 @@
 												CommandParameter="{Binding #list.SelectedItem}"/>
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="DoubleTapped">
+						<ia:InvokeCommandAction Command="{Binding OpenImage}"
+												CommandParameter="{Binding #list.SelectedItem}"/>
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
 				<ListBox.Resources>
 					<vm:EntityToIcoConventer x:Key="FileEntityResource"></vm:EntityToIcoConventer>
 				</ListBox.Resources>
@@ -58,6 +64,7 @@
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
+			<Image Grid.Row="3" Grid.Column="1" Source="{Binding SeeCurrentImageResult}"/>
 		</Grid>
 	</Border>
 	
