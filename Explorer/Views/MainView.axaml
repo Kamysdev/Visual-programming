@@ -20,6 +20,7 @@
 			<Menu Grid.Row="1">
 				<MenuItem Header="_File">
 					<MenuItem Header="_Open..."/>
+					<MenuItem Header="_See image" Command="{Binding ImageVisibility}"/>
 					<Separator/>
 				</MenuItem>
 				<MenuItem Header="_Edit">

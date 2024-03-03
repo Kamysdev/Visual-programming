@@ -38,7 +38,6 @@ public partial class MainViewModel : BaseViewModel
 
     private List<string> formats = [".png", ".jpg", ".jpeg", ".bmp", ".ico", ".gif"];
 
-
     public ICommand OpenCommand { get; }
     public ICommand ImageCommand { get; }
 
@@ -49,6 +48,8 @@ public partial class MainViewModel : BaseViewModel
 
         GetLogicDrives();
     }
+
+    private bool _ImageVisibility = false;
 
     public void GoBack()
     {
@@ -125,6 +126,14 @@ public partial class MainViewModel : BaseViewModel
         }
     }
 
+    public void OpenImage(object parameter)
+    {
+        if (parameter is FileViewModel fileViewModel)
+        {
+            SeeCurrentImageResult = new Bitmap(fileViewModel.FullName);
+        }
+    }
+
     private void MoveInFolders(string movablePath)
     {
         FileDirectory.Clear();
@@ -158,37 +167,39 @@ public partial class MainViewModel : BaseViewModel
             });
 
             box.ShowAsync();
-            MoveInFolders(LastFilePath);
+            GoBack();
         }
-        
+
         try
         {
             foreach (var fileInfo in dirInfo.GetFiles())
             {
                 foreach (var format in formats)
                 {
-                    if (fileInfo.Name.EndsWith(format))
+                    if (_ImageVisibility)
+                    {
                         FileDirectory.Add(new FileViewModel(fileInfo));
+                        break;
+                    }
+                    else if (fileInfo.Name.EndsWith(format))
+                    {
+                        FileDirectory.Add(new FileViewModel(fileInfo));
+                        break;
+                    }
                 }
             }
         }
-        catch
-        {
-
-        }
+        catch { }
     }
 
+    public void ImageVisibility(object parameter)
+    {
+        _ImageVisibility = !_ImageVisibility;
+        ReloadEntity();
+    }
 
     private void ReloadEntity()
     {
         MoveInFolders(FilePath);
-    }
-
-    public void OpenImage(object parameter)
-    {
-        if (parameter is FileViewModel fileViewModel)
-        {
-            SeeCurrentImageResult = new Bitmap(fileViewModel.FullName);
-        }
     }
 }
