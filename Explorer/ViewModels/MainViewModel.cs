@@ -1,15 +1,12 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows.Input;
 
 namespace Explorer.ViewModels;
@@ -130,7 +127,31 @@ public partial class MainViewModel : BaseViewModel
     {
         if (parameter is FileViewModel fileViewModel)
         {
-            SeeCurrentImageResult = new Bitmap(fileViewModel.FullName);
+            try
+            {
+                SeeCurrentImageResult = new Bitmap(fileViewModel.FullName);
+            }
+            catch
+            {
+                var box = MessageBoxManager.GetMessageBoxCustom(
+                new MessageBoxCustomParams
+                {
+                    ButtonDefinitions = new List<ButtonDefinition>
+                    {
+                    new ButtonDefinition { Name = "Ok", },
+                    },
+                    ContentTitle = "Error",
+                    ContentMessage = "Selected file are not in image formet list!",
+                    Icon = MsBox.Avalonia.Enums.Icon.Error,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    CanResize = false,
+                    MaxWidth = 400,
+                    MaxHeight = 200,
+                    ShowInCenter = true,
+                    Topmost = false,
+                });
+                box.ShowAsync();
+            }
         }
     }
 
