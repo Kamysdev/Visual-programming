@@ -23,6 +23,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Explorer", "Explorer\Explor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Explorer.Desktop", "Explorer.Desktop\Explorer.Desktop.csproj", "{97F108D8-81E4-4278-86DA-173D0E6487CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab6", "Lab6", "{992E32C6-ADD7-4F4F-9096-06AF2833B61D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weater Application", "Weater Application\Weater Application.csproj", "{6CB54F5D-137D-4329-A543-B6B10F63FA13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weater Application.Desktop", "Weater Application.Desktop\Weater Application.Desktop.csproj", "{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +63,14 @@ Global
 		{97F108D8-81E4-4278-86DA-173D0E6487CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97F108D8-81E4-4278-86DA-173D0E6487CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97F108D8-81E4-4278-86DA-173D0E6487CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB54F5D-137D-4329-A543-B6B10F63FA13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB54F5D-137D-4329-A543-B6B10F63FA13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB54F5D-137D-4329-A543-B6B10F63FA13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB54F5D-137D-4329-A543-B6B10F63FA13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +82,8 @@ Global
 		{F7B830EB-439D-4A71-861D-BC5B4796790F} = {C0C16AD9-7A0A-4F3F-9491-2FDF956BC98B}
 		{DADABDC8-0F38-46EB-A791-1634FC810700} = {DF3ED66C-BDEF-4736-A871-352339B5743B}
 		{97F108D8-81E4-4278-86DA-173D0E6487CB} = {DF3ED66C-BDEF-4736-A871-352339B5743B}
+		{6CB54F5D-137D-4329-A543-B6B10F63FA13} = {992E32C6-ADD7-4F4F-9096-06AF2833B61D}
+		{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D} = {992E32C6-ADD7-4F4F-9096-06AF2833B61D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EBD6783-4AA3-46D5-B9F5-BAE17F7E5223}

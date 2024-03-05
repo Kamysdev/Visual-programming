@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Weater_Application.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="461" d:DesignHeight="1000"
+             x:Class="Weater_Application.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+	<Grid ColumnDefinitions="*, *, *, *, *" 
+		  RowDefinitions="*, *, *, *, *, *, *, *, *, *, *" 
+		  ShowGridLines="False">
+		<TextBlock Grid.Column="1"
+				   Grid.Row="0"
+				   Grid.ColumnSpan="3"
+				   Text="Tuesday, 15"
+				   TextAlignment="Center"
+				   Padding="0 25 0 0"
+				   FontSize="28"
+				   FontWeight="200"/>
+		<Grid Grid.Row="1" 
+			  Grid.ColumnSpan="5"
+			  Grid.RowSpan="2"
+			  ColumnDefinitions="*, 0.3*, *"
+			  RowDefinitions="0.3*, 0.7*"
+			  ShowGridLines="True">
+			<TextBlock Text="Moscow"
+					   FontSize="32"
+					   FontWeight="Medium"
+					   TextAlignment="Left"
+					   Padding="30 0 0 0"/>
+			<TextBlock Grid.Row="1"
+					   Text="+27"
+					   TextAlignment="Left"
+					   Padding="15 0 0 0"
+					   FontSize="92"
+					   FontWeight="ExtraBold"/>
+			<Image Grid.Column="2"
+				   Grid.RowSpan="2"
+				   Source="/Assets/ico style 2/blue-clouds-and-yellow-sun-16529.png"/>
+		</Grid>
+	</Grid>
+</UserControl>
