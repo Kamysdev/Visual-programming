@@ -3,6 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Weater_Application.ViewModels"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              mc:Ignorable="d" d:DesignWidth="461" d:DesignHeight="1000"
              x:Class="Weater_Application.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -14,7 +16,7 @@
 
 	<Grid ColumnDefinitions="*, *, *, *, *" 
 		  RowDefinitions="*, *, *, *, *, *, *, *, *, *, *" 
-		  ShowGridLines="True">
+		  ShowGridLines="False">
 		<TextBlock Grid.Column="1"
 				   Grid.Row="0"
 				   Grid.ColumnSpan="3"
@@ -47,13 +49,33 @@
 
 		<Grid Grid.Row="3"
 			  Grid.ColumnSpan="5"
-			  Grid.RowSpan="3">
-			<ListBox Background="Transparent"
+			  Grid.RowSpan="3"
+			  ColumnDefinitions="*"
+			  RowDefinitions="*">
+			<ListBox
+					 Background="Gray"
 					 Name="ByTimeWeather"
-					 ItemsSource="{Binding TimedWeather}"
-					 SelectedItem="{Binding #ByTimeWeather.SelectedTime}">
+					 ItemsSource="{Binding WeatherList}"
+					 SelectedItem="{Binding SelectedWeather}">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="DoubleTapped">
+						<ia:InvokeCommandAction Command="{Binding OpenCommand}"
+												CommandParameter="{Binding #ByTimeWeather.SelectedWeather}"/>
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding UV}"/>
+						</StackPanel>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
 
+				<ListBox.ItemTemplate>
+					<DataTemplate>
 
+					</DataTemplate>
+				</ListBox.ItemTemplate>
 			</ListBox>
 		</Grid>
 		
