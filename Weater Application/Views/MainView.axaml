@@ -14,29 +14,29 @@
 
 	<Grid ColumnDefinitions="*, *, *, *, *" 
 		  RowDefinitions="*, *, *, *, *, *, *, *, *, *, *" 
-		  ShowGridLines="False">
+		  ShowGridLines="True">
 		<TextBlock Grid.Column="1"
 				   Grid.Row="0"
 				   Grid.ColumnSpan="3"
-				   Text="Tuesday, 15"
+				   Text="{Binding CurrentDay}"
 				   TextAlignment="Center"
 				   Padding="0 25 0 0"
 				   FontSize="28"
 				   FontWeight="200"/>
-		<Grid Grid.Row="1" 
+		<Grid Grid.Row="1"
 			  Grid.ColumnSpan="5"
 			  Grid.RowSpan="2"
 			  ColumnDefinitions="*, 0.3*, *"
-			  RowDefinitions="0.3*, 0.7*"
-			  ShowGridLines="True">
+			  RowDefinitions="0.3*, 0.7*">
 			<TextBlock Text="Moscow"
 					   FontSize="32"
 					   FontWeight="Medium"
 					   TextAlignment="Left"
 					   Padding="30 0 0 0"/>
 			<TextBlock Grid.Row="1"
-					   Text="+27"
+					   Text="{Binding CurrentTemp}"
 					   TextAlignment="Left"
+					   Foreground="#62C3F7"
 					   Padding="15 0 0 0"
 					   FontSize="92"
 					   FontWeight="ExtraBold"/>
@@ -44,5 +44,23 @@
 				   Grid.RowSpan="2"
 				   Source="/Assets/ico style 2/blue-clouds-and-yellow-sun-16529.png"/>
 		</Grid>
+
+		<Grid Grid.Row="3"
+			  Grid.ColumnSpan="5"
+			  Grid.RowSpan="3">
+			<ListBox Background="Transparent"
+					 Name="ByTimeWeather"
+					 ItemsSource="{Binding TimedWeather}"
+					 SelectedItem="{Binding #ByTimeWeather.SelectedTime}">
+
+
+			</ListBox>
+		</Grid>
+		
+		<Border Grid.Row="6" Grid.RowSpan="5" Grid.ColumnSpan="5" CornerRadius="25" Background="#1F1F1F">
+			<Grid>
+
+			</Grid>
+		</Border>
 	</Grid>
 </UserControl>

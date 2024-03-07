@@ -8,7 +8,7 @@
         x:Class="Weater_Application.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Weater_Application"
-		Background="Gray"
+		Background="#3C3C3C"
 		Height="1000"
 		Width="461">
         <views:MainView />
