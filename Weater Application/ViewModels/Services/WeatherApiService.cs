@@ -13,8 +13,10 @@ internal class WeatherApiService
 
     public WeatherApiService()
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri(Constants.API_BASE_URL);
+        _httpClient = new HttpClient
+        {
+            BaseAddress = new Uri(Constants.API_BASE_URL)
+        };
     }
 
     public async Task<WeatherApiResponse> GetWeatherInformation(string city)

@@ -114,12 +114,12 @@
 				<TextBlock Grid.Column="1"
 						   Classes="CurrentWeatherText"
 						   Text="Wind"
-						   Padding="30 0 0 0"/>
+						   Padding="20 0 0 0"/>
 				<TextBlock Grid.Row="1" 
 						   Grid.Column="1"
 						   Classes="BoldText" 
 						   Text="{Binding SelectedWeather.Wind}" 
-						   Padding="30 0 0 0"/>
+						   Padding="20 0 0 0"/>
 				<TextBlock Grid.Column="2"
 						   Classes="CurrentWeatherText"
 						   Text="Air Pressure"
@@ -131,13 +131,13 @@
 						   Padding="10 0 0 0"/>
 				<TextBlock Grid.Column="3"
 						   Classes="CurrentWeatherText"
-						   Text="UV"
-						   Padding="40 0 0 0"/>
+						   Text="Feels like"
+						   Padding="20 0 0 0"/>
 				<TextBlock Grid.Row="1" 
 						   Grid.Column="3"
 						   Classes="BoldText" 
 						   Text="{Binding SelectedWeather.UV}" 
-						   Padding="40 0 0 0"/>
+						   Padding="20 0 0 0"/>
 			</Grid>
 		</Grid>
 		

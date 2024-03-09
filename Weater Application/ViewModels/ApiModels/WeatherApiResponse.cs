@@ -10,27 +10,27 @@ namespace Weater_Application.ViewModels.ApiModels;
 internal class WeatherApiResponse
 {
     [JsonPropertyName("cod")]
-    public string Cod { get; set; }
+    public string? Cod { get; set; }
     [JsonPropertyName("message")]
     public int Message { get; set; }
     [JsonPropertyName("cnt")]
     public int Cnt { get; set; }
     [JsonPropertyName("list")]
-    public WeatherApiResponseList[] List { get; set; }
+    public WeatherApiResponseList[]? List { get; set; }
     [JsonPropertyName("city")]
-    public WeatherApiResponseCity City { get; set; }
+    public WeatherApiResponseCity? City { get; set; }
 }
 
 public class WeatherApiResponseCity
 {
-    public int id { get; set; }
-    public string name { get; set; }
-    public Coord coord { get; set; }
-    public string country { get; set; }
-    public int population { get; set; }
-    public int timezone { get; set; }
-    public int sunrise { get; set; }
-    public int sunset { get; set; }
+    public int? id { get; set; }
+    public string? name { get; set; }
+    public Coord? coord { get; set; }
+    public string? country { get; set; }
+    public int? population { get; set; }
+    public int? timezone { get; set; }
+    public int? sunrise { get; set; }
+    public int? sunset { get; set; }
 }
 
 public class Coord
@@ -42,16 +42,16 @@ public class Coord
 public class WeatherApiResponseList
 {
     public int dt { get; set; }
-    public Main main { get; set; }
-    public Weather[] weather { get; set; }
-    public Clouds clouds { get; set; }
-    public Wind wind { get; set; }
+    public Main? main { get; set; }
+    public Weather[]? weather { get; set; }
+    public Clouds? clouds { get; set; }
+    public Wind? wind { get; set; }
     public int visibility { get; set; }
     public float pop { get; set; }
-    public Snow snow { get; set; }
-    public Sys sys { get; set; }
-    public string dt_txt { get; set; }
-    public Rain rain { get; set; }
+    public Snow? snow { get; set; }
+    public Sys? sys { get; set; }
+    public string? dt_txt { get; set; }
+    public Rain? rain { get; set; }
 }
 
 public class Main
@@ -97,7 +97,7 @@ public class Rain
 public class Weather
 {
     public int id { get; set; }
-    public string main { get; set; }
-    public string description { get; set; }
-    public string icon { get; set; }
+    public string? main { get; set; }
+    public string? description { get; set; }
+    public string? icon { get; set; }
 }
