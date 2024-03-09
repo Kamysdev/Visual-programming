@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
+using Avalonia.Controls;
 
 namespace Weater_Application.ViewModels;
 
@@ -20,7 +21,6 @@ public partial class MainViewModel : BaseViewModel
         set { _SelectedWeeklyWeather = value; OnPropertyChanged(nameof(SelectedWeeklyWeather)); }
     }
     public WeeklyUserWeather? _SelectedWeeklyWeather {  get; set; }
-
 
     public WeatherViewModel? SelectedWeather {
         get => _SelectedWeather;
@@ -49,11 +49,20 @@ public partial class MainViewModel : BaseViewModel
     }
     private Bitmap _CurrentIco { get; set; }
 
+    public string CurrentCity 
+    {
+        get => _CurrentCity;
+        set { _CurrentCity = value; OnPropertyChanged(nameof(CurrentCity)); }
+    }
+    public string _CurrentCity { get; set; }
+
     public ICommand GetWeatherFromCollection { get; }
 
     public MainViewModel()
     {
         _weatherApiService = new WeatherApiService();
+
+        CurrentCity = "Novosibirsk";
 
         SetCurrentTime();
         FetchWeatherInformation();
@@ -64,11 +73,17 @@ public partial class MainViewModel : BaseViewModel
         CurrentDay = DateTime.Now.DayOfWeek.ToString() + ", " + DateTime.Now.Day.ToString();
     }
 
+    public void MakeTask(object param)
+    {
+        FetchWeatherInformation();
+    }
+
     private async Task FetchWeatherInformation()
     {
-        var weatherApiResponse = await _weatherApiService.GetWeatherInformation("Novosibirsk");
+        var weatherApiResponse = await _weatherApiService.GetWeatherInformation(CurrentCity);
         if (weatherApiResponse != null) 
         {
+            WeatherList.Clear();
             for (int i = 0; i < 40; i++) 
             {
                 WeatherList.Add(new UserWeather($"{Math.Round(Convert.ToDouble(weatherApiResponse.List[i].main.temp))}°C",
@@ -80,6 +95,7 @@ public partial class MainViewModel : BaseViewModel
             }
             CurrentTemp = WeatherList[0].Temperature;
             CurrentIco = new WeatherToIcoConverter().Loader(WeatherList[0].Time, WeatherList[0].WeatherID);
+            WeeklyWeatherList.Clear();
             SetWeeklyWeather();
         }
     }

@@ -47,6 +47,16 @@
 			<Setter Property="FontSize" Value="18"/>
 			<Setter Property="FontWeight" Value="Light"/>
 		</Style>
+		<Style Selector="MenuItem:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+		<Style Selector="MenuItem:selected /template/ ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+		<Style Selector="Menu">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+		
 	</UserControl.Styles>
 	
 	<Grid ColumnDefinitions="* * * * *" 
@@ -66,11 +76,19 @@
 			  ColumnDefinitions="250 *"
 			  RowDefinitions="0.3* 0.7*"
 			  ShowGridLines="False">
-			<TextBlock Text="Novosibirsk"
-					   FontSize="32"
-					   FontWeight="Medium"
-					   TextAlignment="Left"
-					   Padding="15 0 0 0"/>
+			<Menu>
+				<MenuItem Header="{Binding CurrentCity}"
+						  FontSize="32"
+						  FontWeight="Medium"
+						  Padding="20 0 0 0">
+					<TextBox Text="{Binding CurrentCity, Mode=TwoWay}"/>
+					<Button VerticalAlignment="Stretch" 
+							HorizontalAlignment="Stretch"
+							Content="Submit"
+							Command="{Binding MakeTask}"
+							CommandParameter="1"/>
+				</MenuItem>
+			</Menu>
 			<TextBlock Grid.Row="1"
 					   Text="{Binding CurrentTemp}"
 					   TextAlignment="Left"
