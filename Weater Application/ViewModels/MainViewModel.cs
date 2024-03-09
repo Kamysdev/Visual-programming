@@ -1,48 +1,67 @@
-﻿using System.Threading;
-using System.Text.Json;
-using System.IO;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System;
-using System.Net.Http.Json;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace Weater_Application.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
-    private string APIKEY = "e2ed2c756067721c0b6d55a31ca957d0";
+    private readonly WeatherApiService _weatherApiService;
 
-    public ObservableCollection<WeatherViewModel> WeatherList { get; set; } = [];
+    public ObservableCollection<UserWeater> WeatherList { get; set; } = [];
+    
+    public WeatherViewModel? SelectedWeather {
+        get => _SelectedWeather;
+        set { _SelectedWeather = value; OnPropertyChanged(nameof(SelectedWeather)); }
+    }
 
-    public WeatherViewModel? SelectedWeather {  get; set; }
+    public WeatherViewModel? _SelectedWeather { get; set; }
 
     public string CurrentDay
     {
         get => _CurrentDay;
         set { _CurrentDay = value; OnPropertyChanged(nameof(CurrentDay)); }
     }
-
     public string _CurrentDay { get; set; }
 
     public string CurrentTemp { get; set; }
 
+    public ICommand GetWeatherFromCollection { get; }
 
     public MainViewModel()
     {
+        _weatherApiService = new WeatherApiService();
+
         SetCurrentTime();
         CurrentTemp = "-27";
-        MakeAPIWeatherCall();
-
-        SelectedWeather = new WeatherViewModel("fwfwa", "dawgaw ", "fawga", "waewa", "jtjtdfjr");
-
-        WeatherList.Add(SelectedWeather);
-        WeatherList.Add(SelectedWeather);
-        WeatherList.Add(SelectedWeather);
+        FetchWeatherInformation();
     }
+
+    UserWeater weater;
 
     private void SetCurrentTime()
     {
         CurrentDay = System.DateTime.Now.DayOfWeek.ToString() + ", " + System.DateTime.Now.Day.ToString();
+    }
+
+    public class MainUserWeather : WeatherViewModel
+    {
+        public MainUserWeather(string? temperature, string? humidity, string? wind, string? airPressure, string? uV) : base(temperature, humidity, wind, airPressure, uV)
+        {
+        }
+
+        public string? City { get; set; }
+    }
+
+    public class UserWeater : WeatherViewModel
+    {
+        public UserWeater(string? temperature, string? humidity, string? wind, string? airPressure, string? uV) : base(temperature, humidity, wind, airPressure, uV)
+        {
+        }
+
+        public string? Time { get; set; }
     }
 
     public class WeatherViewModel 
@@ -61,31 +80,21 @@ public class MainViewModel : BaseViewModel
         public string? Wind { get; }
         public string? AirPressure { get; }
         public string? UV { get; }
-
-
     }
 
-    public class Location 
-    { 
-        public string? lat { get; set; }
-        public string? lng { get; set; }
-    }
-
-    public void MakeAPIAdressCall()
+    private async Task FetchWeatherInformation()
     {
-        using HttpClient client = new()
+        var weatherApiResponse = await _weatherApiService.GetWeatherInformation("Novosibirsk");
+        if (weatherApiResponse != null) 
         {
-            BaseAddress = 
-            new Uri("http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=e2ed2c756067721c0b6d55a31ca957d0")
-        };
-    }
-
-    public async void MakeAPIWeatherCall()
-    {
-        using HttpClient client = new()
-        {
-            BaseAddress = 
-            new Uri("https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=e2ed2c756067721c0b6d55a31ca957d0")
-        };
+            for (int i = 0; i < 5; i++) 
+            {
+                WeatherList.Add(new UserWeater($"{weatherApiResponse.List[i].main.temp}°",
+                    $"{weatherApiResponse.List[i].main.humidity}%",
+                    $"{weatherApiResponse.List[i].wind.speed} m/s",
+                    $"{weatherApiResponse.List[i].main.pressure} mm",
+                    $"{weatherApiResponse.List[i].clouds.all}"));
+            }
+        }
     }
 }

@@ -14,8 +14,35 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-	<Grid ColumnDefinitions="*, *, *, *, *" 
-		  RowDefinitions="*, *, *, *, *, *, *, *, *, *, *" 
+	<UserControl.Styles>
+		<Style Selector="ListBox">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+		<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+			<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+		<Style Selector="ListBoxItem">
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="Width" Value="90"></Setter>
+		</Style>
+		<Style Selector="TextBlock.BoldText">
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontSize" Value="24"/>
+			<Setter Property="Foreground" Value="#62C3F7"/>
+		</Style>
+		<Style Selector="TextBlock.CurrentWeatherText">
+			<Setter Property="TextAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Bottom"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontWeight" Value="Light"/>
+		</Style>
+	</UserControl.Styles>
+	
+	<Grid ColumnDefinitions="* * * * *" 
+		  RowDefinitions="* * * * * * * * * * *" 
 		  ShowGridLines="False">
 		<TextBlock Grid.Column="1"
 				   Grid.Row="0"
@@ -28,8 +55,8 @@
 		<Grid Grid.Row="1"
 			  Grid.ColumnSpan="5"
 			  Grid.RowSpan="2"
-			  ColumnDefinitions="*, 0.3*, *"
-			  RowDefinitions="0.3*, 0.7*">
+			  ColumnDefinitions="* 0.3* *"
+			  RowDefinitions="0.3* 0.7*">
 			<TextBlock Text="Moscow"
 					   FontSize="32"
 					   FontWeight="Medium"
@@ -46,42 +73,79 @@
 				   Grid.RowSpan="2"
 				   Source="/Assets/ico style 2/blue-clouds-and-yellow-sun-16529.png"/>
 		</Grid>
-
+		
 		<Grid Grid.Row="3"
 			  Grid.ColumnSpan="5"
 			  Grid.RowSpan="3"
 			  ColumnDefinitions="*"
-			  RowDefinitions="*">
+			  RowDefinitions="auto *"
+			  ShowGridLines="False">
 			<ListBox
-					 Background="Gray"
 					 Name="ByTimeWeather"
 					 ItemsSource="{Binding WeatherList}"
 					 SelectedItem="{Binding SelectedWeather}">
-				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="DoubleTapped">
-						<ia:InvokeCommandAction Command="{Binding OpenCommand}"
-												CommandParameter="{Binding #ByTimeWeather.SelectedWeather}"/>
-					</ia:EventTriggerBehavior>
-				</i:Interaction.Behaviors>
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="{Binding UV}"/>
 						</StackPanel>
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel>
 
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-
+						<Grid RowDefinitions="0.3*, 0.5*, *" ShowGridLines="False">
+							<TextBlock Text="{Binding Time}" FontSize="18"/>
+							<TextBlock Classes="BoldText"
+									   Grid.Row="1" 
+									   Text="{Binding Temperature}"/>
+							<Image Grid.Row="2" Source="avares://Weater Application/Assets/ico style 2/snow-and-blue-cloud-16540.png"/>
+						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
+			<Grid Grid.Row="1" RowDefinitions="0.8* *" ColumnDefinitions="* * * *" ShowGridLines="False">
+				<TextBlock Classes="CurrentWeatherText" 
+						   Text="Humidity" 
+						   Padding="30 0 0 0"/>
+				<TextBlock Grid.Row="1" 
+						   Classes="BoldText" 
+						   Text="{Binding SelectedWeather.Humidity}" 
+						   Padding="30 0 0 0"/>
+				<TextBlock Grid.Column="1"
+						   Classes="CurrentWeatherText"
+						   Text="Wind"
+						   Padding="30 0 0 0"/>
+				<TextBlock Grid.Row="1" 
+						   Grid.Column="1"
+						   Classes="BoldText" 
+						   Text="{Binding SelectedWeather.Wind}" 
+						   Padding="30 0 0 0"/>
+				<TextBlock Grid.Column="2"
+						   Classes="CurrentWeatherText"
+						   Text="Air Pressure"
+						   Padding="10 0 0 0"/>
+				<TextBlock Grid.Row="1" 
+						   Grid.Column="2"
+						   Classes="BoldText" 
+						   Text="{Binding SelectedWeather.AirPressure}" 
+						   Padding="10 0 0 0"/>
+				<TextBlock Grid.Column="3"
+						   Classes="CurrentWeatherText"
+						   Text="UV"
+						   Padding="40 0 0 0"/>
+				<TextBlock Grid.Row="1" 
+						   Grid.Column="3"
+						   Classes="BoldText" 
+						   Text="{Binding SelectedWeather.UV}" 
+						   Padding="40 0 0 0"/>
+			</Grid>
 		</Grid>
 		
 		<Border Grid.Row="6" Grid.RowSpan="5" Grid.ColumnSpan="5" CornerRadius="25" Background="#1F1F1F">
 			<Grid>
-
+				<ListBox>
+					
+				</ListBox>
 			</Grid>
 		</Border>
 	</Grid>

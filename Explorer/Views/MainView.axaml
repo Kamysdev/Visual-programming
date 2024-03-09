@@ -58,7 +58,7 @@
 				</ListBox.Resources>
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<Grid ColumnDefinitions="15, auto" RowDefinitions="30, auto">
+						<Grid ColumnDefinitions="15, auto" RowDefinitions="auto, auto">
 							<Image Grid.Row="0" Grid.Column="0" Source="{Binding ., Converter={StaticResource FileEntityResource} }"></Image>
 							<TextBlock Grid.Row="0" Grid.Column="1" Margin="15 0 0 0" Text="{Binding Name}"/>
 						</Grid>
