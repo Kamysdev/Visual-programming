@@ -6,10 +6,12 @@
         xmlns:views="clr-namespace:Weater_Application.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="1733"
         x:Class="Weater_Application.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/ico style 2/yellow-sun.png"
         Title="Weater_Application"
 		Background="#3C3C3C"
+		MinHeight="1000"
+		MinWidth="460"
 		Height="1000"
-		Width="461">
+		Width="460">
         <views:MainView />
 </Window>

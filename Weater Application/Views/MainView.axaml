@@ -24,18 +24,26 @@
 			<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
-		<Style Selector="ListBoxItem">
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="Width" Value="90"></Setter>
-		</Style>
 		<Style Selector="TextBlock.BoldText">
 			<Setter Property="FontWeight" Value="Bold"/>
-			<Setter Property="FontSize" Value="24"/>
+			<Setter Property="FontSize" Value="20"/>
 			<Setter Property="Foreground" Value="#62C3F7"/>
 		</Style>
 		<Style Selector="TextBlock.CurrentWeatherText">
 			<Setter Property="TextAlignment" Value="Left"/>
 			<Setter Property="VerticalAlignment" Value="Bottom"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontWeight" Value="Light"/>
+		</Style>
+		<Style Selector="TextBlock.WeeklyWeather">
+			<Setter Property="TextAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+		</Style>
+		<Style Selector="TextBlock.WeeklyWeatherHeader">
+			<Setter Property="TextAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
 			<Setter Property="FontSize" Value="18"/>
 			<Setter Property="FontWeight" Value="Light"/>
 		</Style>
@@ -55,13 +63,14 @@
 		<Grid Grid.Row="1"
 			  Grid.ColumnSpan="5"
 			  Grid.RowSpan="2"
-			  ColumnDefinitions="* 0.3* *"
-			  RowDefinitions="0.3* 0.7*">
-			<TextBlock Text="Moscow"
+			  ColumnDefinitions="250 *"
+			  RowDefinitions="0.3* 0.7*"
+			  ShowGridLines="False">
+			<TextBlock Text="Novosibirsk"
 					   FontSize="32"
 					   FontWeight="Medium"
 					   TextAlignment="Left"
-					   Padding="30 0 0 0"/>
+					   Padding="15 0 0 0"/>
 			<TextBlock Grid.Row="1"
 					   Text="{Binding CurrentTemp}"
 					   TextAlignment="Left"
@@ -69,24 +78,41 @@
 					   Padding="15 0 0 0"
 					   FontSize="92"
 					   FontWeight="ExtraBold"/>
-			<Image Grid.Column="2"
-				   Grid.RowSpan="2"
-				   Source="/Assets/ico style 2/blue-clouds-and-yellow-sun-16529.png"/>
+			<Border Padding="60 0 0 0"
+				    Grid.Column="2"
+				    Grid.RowSpan="2">
+				<Image HorizontalAlignment="Left"
+					   Classes="Header"
+					   Source="{Binding CurrentIco}"
+				       Height="100"/>
+			</Border>
 		</Grid>
 		
 		<Grid Grid.Row="3"
 			  Grid.ColumnSpan="5"
 			  Grid.RowSpan="3"
 			  ColumnDefinitions="*"
-			  RowDefinitions="auto *"
+			  RowDefinitions="1.5* *"
 			  ShowGridLines="False">
-			<ListBox
-					 Name="ByTimeWeather"
+			<ListBox Padding="10 0 0 0"
+					 x:Name="ByTimeWeather"
 					 ItemsSource="{Binding WeatherList}"
 					 SelectedItem="{Binding SelectedWeather}">
+
+				<ListBox.Resources>
+					<vm:WeatherToIcoConverter x:Key="WeatherResource"></vm:WeatherToIcoConverter>
+				</ListBox.Resources>
+
+				<ListBox.Styles>
+					<Style Selector="ListBoxItem">
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						<Setter Property="Width" Value="90"></Setter>
+					</Style>
+				</ListBox.Styles>
+
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
-						<StackPanel Orientation="Horizontal">
+						<StackPanel Orientation="Horizontal" ScrollViewer.IsScrollInertiaEnabled="True">
 						</StackPanel>
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel>
@@ -94,59 +120,89 @@
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Grid RowDefinitions="0.3*, 0.5*, *" ShowGridLines="False">
-							<TextBlock Text="{Binding Time}" FontSize="18"/>
+							<TextBlock Text="{Binding Time}" FontSize="24" FontWeight="Light"/>
 							<TextBlock Classes="BoldText"
 									   Grid.Row="1" 
 									   Text="{Binding Temperature}"/>
-							<Image Grid.Row="2" Source="avares://Weater Application/Assets/ico style 2/snow-and-blue-cloud-16540.png"/>
+							<Image Grid.Row="2" Source="{Binding ., Converter={StaticResource WeatherResource}}"/>
 						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
-			<Grid Grid.Row="1" RowDefinitions="0.8* *" ColumnDefinitions="* * * *" ShowGridLines="False">
-				<TextBlock Classes="CurrentWeatherText" 
-						   Text="Humidity" 
+			<Grid Grid.Row="1" RowDefinitions="0.6* *" ColumnDefinitions="* * * *" ShowGridLines="False">
+				<TextBlock Classes="CurrentWeatherText"
+						   Text="Humidity"
 						   Padding="30 0 0 0"/>
-				<TextBlock Grid.Row="1" 
-						   Classes="BoldText" 
-						   Text="{Binding SelectedWeather.Humidity}" 
+				<TextBlock Grid.Row="1"
+						   Classes="BoldText"
+						   Text="{Binding SelectedWeather.Humidity}"
 						   Padding="30 0 0 0"/>
 				<TextBlock Grid.Column="1"
 						   Classes="CurrentWeatherText"
 						   Text="Wind"
 						   Padding="20 0 0 0"/>
-				<TextBlock Grid.Row="1" 
+				<TextBlock Grid.Row="1"
 						   Grid.Column="1"
-						   Classes="BoldText" 
-						   Text="{Binding SelectedWeather.Wind}" 
+						   Classes="BoldText"
+						   Text="{Binding SelectedWeather.Wind}"
 						   Padding="20 0 0 0"/>
 				<TextBlock Grid.Column="2"
 						   Classes="CurrentWeatherText"
 						   Text="Air Pressure"
 						   Padding="10 0 0 0"/>
-				<TextBlock Grid.Row="1" 
+				<TextBlock Grid.Row="1"
 						   Grid.Column="2"
-						   Classes="BoldText" 
-						   Text="{Binding SelectedWeather.AirPressure}" 
+						   Classes="BoldText"
+						   Text="{Binding SelectedWeather.AirPressure}"
 						   Padding="10 0 0 0"/>
 				<TextBlock Grid.Column="3"
 						   Classes="CurrentWeatherText"
 						   Text="Feels like"
 						   Padding="20 0 0 0"/>
-				<TextBlock Grid.Row="1" 
+				<TextBlock Grid.Row="1"
 						   Grid.Column="3"
-						   Classes="BoldText" 
-						   Text="{Binding SelectedWeather.UV}" 
+						   Classes="BoldText"
+						   Text="{Binding SelectedWeather.UV}"
 						   Padding="20 0 0 0"/>
 			</Grid>
-		</Grid>
+		</Grid>	
 		
-		<Border Grid.Row="6" Grid.RowSpan="5" Grid.ColumnSpan="5" CornerRadius="25" Background="#1F1F1F">
-			<Grid>
-				<ListBox>
-					
-				</ListBox>
-			</Grid>
+		<Border Grid.Row="6" 
+				Grid.RowSpan="5"
+				Grid.ColumnSpan="5" 
+				CornerRadius="25 25 0 0 " 
+				Background="#1F1F1F">
+			<ListBox ItemsSource="{Binding WeeklyWeatherList}"
+					 SelectedItem="{Binding SelectedWeeklyWeather}">
+
+				<ListBox.Styles>
+					<Style Selector="ListBoxItem">
+						<Setter Property="Height" Value="90"></Setter>
+					</Style>
+				</ListBox.Styles>
+				
+				<ListBox.Resources>
+					<vm:WeatherToIcoConverter x:Key="WeeklyWeatherResource"></vm:WeatherToIcoConverter>
+				</ListBox.Resources>
+				
+				
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="3* * * *" ShowGridLines="False">
+							<TextBlock Classes="WeeklyWeatherHeader"
+									   Text="{Binding DayTime}"/>
+							<Image Grid.Column="1" Source="{Binding ., Converter={StaticResource WeeklyWeatherResource}}"/>
+							<TextBlock Classes="WeeklyWeather" 
+									   Grid.Column="2" 
+									   Text="{Binding Temperature}"/>
+							<TextBlock Classes="WeeklyWeather" 
+									   Grid.Column="3"
+									   Foreground="#B6B6B6"
+									   Text="{Binding SecondTemperature}"/>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</Border>
 	</Grid>
 </UserControl>

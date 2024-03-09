@@ -1,9 +1,14 @@
-﻿namespace Weater_Application.ViewModels;
+﻿using Avalonia.Media.Imaging;
+using ExCSS;
 
-public partial class MainViewModel
+namespace Weater_Application.ViewModels;
+
+public class UserWeather : WeatherViewModel
 {
-    public class UserWeater(string? temperature, string? humidity, string? wind, string? airPressure, string? uV, string? time) : WeatherViewModel(temperature, humidity, wind, airPressure, uV)
+    public UserWeather(string? temperature, string? humidity, string? wind, string? airPressure, string? uV, int weatherID, string? time) : base(temperature, humidity, wind, airPressure, uV, weatherID)
     {
-        public string? Time { get; set; } = time;
+        Time = time;
     }
+    public string? Time { get; set; }
 }
+

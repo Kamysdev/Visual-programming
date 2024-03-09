@@ -1,8 +1,8 @@
-﻿using System.Net.Http;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
 
 namespace Weater_Application.ViewModels;
 
@@ -10,22 +10,44 @@ public partial class MainViewModel : BaseViewModel
 {
     private readonly WeatherApiService _weatherApiService;
 
-    public ObservableCollection<UserWeater> WeatherList { get; set; } = [];
-    
+    public ObservableCollection<UserWeather> WeatherList { get; set; } = [];
+
+    public ObservableCollection<WeeklyUserWeather> WeeklyWeatherList { get; set; } = [];
+
+    public WeeklyUserWeather? SelectedWeeklyWeather 
+    {
+        get => _SelectedWeeklyWeather;
+        set { _SelectedWeeklyWeather = value; OnPropertyChanged(nameof(SelectedWeeklyWeather)); }
+    }
+    public WeeklyUserWeather? _SelectedWeeklyWeather {  get; set; }
+
+
     public WeatherViewModel? SelectedWeather {
         get => _SelectedWeather;
         set { _SelectedWeather = value; OnPropertyChanged(nameof(SelectedWeather)); }
     }
-    public WeatherViewModel? _SelectedWeather { get; set; }
+    private WeatherViewModel? _SelectedWeather { get; set; }
 
     public string? CurrentDay
     {
         get => _CurrentDay;
         set { _CurrentDay = value; OnPropertyChanged(nameof(CurrentDay)); }
     }
-    public string? _CurrentDay { get; set; }
+    private string? _CurrentDay { get; set; }
 
-    public string CurrentTemp { get; set; }
+    public string CurrentTemp 
+    {
+        get => _CurrentTemp;
+        set { _CurrentTemp = value; OnPropertyChanged(nameof(CurrentTemp)); }
+    }
+    private string _CurrentTemp { get; set; }
+
+    public Bitmap CurrentIco 
+    {
+        get => _CurrentIco;
+        set { _CurrentIco = value; OnPropertyChanged(nameof(CurrentIco)); }
+    }
+    private Bitmap _CurrentIco { get; set; }
 
     public ICommand GetWeatherFromCollection { get; }
 
@@ -34,13 +56,12 @@ public partial class MainViewModel : BaseViewModel
         _weatherApiService = new WeatherApiService();
 
         SetCurrentTime();
-        CurrentTemp = "-27";
         FetchWeatherInformation();
     }
 
     private void SetCurrentTime()
     {
-        CurrentDay = System.DateTime.Now.DayOfWeek.ToString() + ", " + System.DateTime.Now.Day.ToString();
+        CurrentDay = DateTime.Now.DayOfWeek.ToString() + ", " + DateTime.Now.Day.ToString();
     }
 
     private async Task FetchWeatherInformation()
@@ -48,15 +69,33 @@ public partial class MainViewModel : BaseViewModel
         var weatherApiResponse = await _weatherApiService.GetWeatherInformation("Novosibirsk");
         if (weatherApiResponse != null) 
         {
-            for (int i = 0; i < 5; i++) 
+            for (int i = 0; i < 40; i++) 
             {
-                WeatherList.Add(new UserWeater($"{Math.Round(System.Convert.ToDouble(weatherApiResponse.List[i].main.temp))}°C",
+                WeatherList.Add(new UserWeather($"{Math.Round(Convert.ToDouble(weatherApiResponse.List[i].main.temp))}°C",
                     $"{weatherApiResponse.List[i].main.humidity}%",
-                    $"{Math.Round(System.Convert.ToDouble(weatherApiResponse.List[i].wind.speed), 1)} m/s",
+                    $"{Math.Round(Convert.ToDouble(weatherApiResponse.List[i].wind.speed), 1)} m/s",
                     $"{weatherApiResponse.List[i].main.pressure} mm",
-                    $"{Math.Round(System.Convert.ToDouble(weatherApiResponse.List[i].main.feels_like))}°C",
-                    "18:00"));
+                    $"{Math.Round(Convert.ToDouble(weatherApiResponse.List[i].main.feels_like))}°C",
+                    weatherApiResponse.List[i].weather[0].id, GetTime(weatherApiResponse.List[i].dt_txt)));
             }
+            CurrentTemp = WeatherList[0].Temperature;
+            CurrentIco = new WeatherToIcoConverter().Loader(WeatherList[0].Time, WeatherList[0].WeatherID);
+            SetWeeklyWeather();
         }
+    }
+
+    private string GetTime(string date)
+    {
+        int tempTime = System.Convert.ToInt32(date.Substring(date.LastIndexOf(" ") + 1).Remove(2));
+        if (tempTime <= 19)
+        {
+            tempTime += 4;
+        }
+        else
+        {
+            tempTime -= 20;
+        }
+
+        return tempTime.ToString() + ":00";
     }
 }
