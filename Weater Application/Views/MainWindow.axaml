@@ -8,7 +8,7 @@
         x:Class="Weater_Application.Views.MainWindow"
         Icon="/Assets/ico style 2/yellow-sun.png"
         Title="Weater_Application"
-		Background="#3C3C3C"
+		Background="{Binding MainBackground}"
 		MinHeight="1000"
 		MinWidth="460"
 		Height="1000"

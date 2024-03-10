@@ -64,6 +64,7 @@ public partial class MainViewModel : BaseViewModel
 
         CurrentCity = "Novosibirsk";
 
+        SetTheme();
         SetCurrentTime();
         FetchWeatherInformation();
     }
