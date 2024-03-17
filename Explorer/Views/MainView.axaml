@@ -41,12 +41,14 @@
 					 Name="list"
 					 ItemsSource="{Binding FileDirectory}"
 					 SelectedItem="{Binding SelectedFile}">
+					 
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="DoubleTapped">
 						<ia:InvokeCommandAction Command="{Binding OpenCommand}"
 												CommandParameter="{Binding #list.SelectedItem}"/>
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
+
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="DoubleTapped">
 						<ia:InvokeCommandAction Command="{Binding OpenImage}"
