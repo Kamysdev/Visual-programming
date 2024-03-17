@@ -5,11 +5,54 @@
              xmlns:vm="clr-namespace:UsersTables.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="UsersTables.Views.MainView"
+			 Background="#404040"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
+	<Grid RowDefinitions="30, *">
+		<Menu>
+			<MenuItem Header="_Edit">
+				<MenuItem Header="_Add Record"
+						  Command="{Binding ShowAdditionalWindow}"/>
+				<MenuItem Header="_Remove Record"
+						  Command="{Binding ShowRemovableWindow}"/>
+				<MenuItem Header="Edit Record"
+						  Command="{Binding ShowEditWindow}"/>
+			</MenuItem>
+		</Menu>
+		<DataGrid Grid.Row="1"
+			      Margin="20"
+				  ItemsSource="{Binding UsersList}"
+                  IsReadOnly="False"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True"
+                  GridLinesVisibility="All"
+                  BorderThickness="1" 
+				  BorderBrush="Gray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"  
+								    Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Name" 
+								    Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Nick" 
+								    Binding="{Binding NickName}" />
+                <DataGridTextColumn Header="Email" 
+								    Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Phone" 
+								    Binding="{Binding Phone}" />
+                <DataGridTextColumn Header="Website" 
+								    Binding="{Binding Website}" />
+                <DataGridTextColumn Header="City" 
+								    Binding="{Binding City}" />
+                <DataGridTextColumn Header="Company" 
+								    Binding="{Binding CompanyName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+	</Grid>
+    
 
 </UserControl>

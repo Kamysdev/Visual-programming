@@ -7,13 +7,7 @@ using System.Threading.Tasks;
 
 namespace UsersTables.ViewModels.ApiModels;
 
-internal class UserApiResponse
-{
-    [JsonPropertyName("Property1")]
-    public UserClass1[] Property1 { get; set; }
-}
-
-public class UserClass1
+public class UserApiResponse
 {
     public int id { get; set; }
     public string name { get; set; }

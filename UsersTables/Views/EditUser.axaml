@@ -1,0 +1,73 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+		Width="800"
+		Height="150"
+		Background="Transparent"
+		SystemDecorations="None"
+		WindowStartupLocation="CenterScreen"
+        x:Class="UsersTables.EditUser"
+        Title="Edit User">
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="Margin" Value="10"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Margin" Value="10 30 10 30"/>
+		</Style>
+	</Window.Styles>
+
+	<Border CornerRadius="15"
+			Background="#404040"
+			BorderBrush="White"
+			BorderThickness="1">
+		<Grid ColumnDefinitions="* * * * * * *"
+			  RowDefinitions="* * *"
+			  ShowGridLines="False">
+
+			<TextBox Text="{Binding removableID}"
+					 Grid.Row="2"
+					 Grid.Column="3">
+
+				<TextBox.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="Margin" Value="10"/>
+					</Style>
+				</TextBox.Styles>
+			</TextBox>
+
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addName, Mode=TwoWay}" Grid.Column="0"></TextBox>
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addNickName, Mode=TwoWay}" Grid.Column="1"/>
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addEmail, Mode=TwoWay}" Grid.Column="2"/>
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addPhone, Mode=TwoWay}" Grid.Column="3"/>
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addWebsite, Mode=TwoWay}" Grid.Column="4"/>
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addCity, Mode=TwoWay}" Grid.Column="5"/>
+			<TextBox Grid.RowSpan="2"
+					 Text="{Binding addCompanyName, Mode=TwoWay}" Grid.Column="6"/>
+
+			<Button Grid.Column="1"
+					Grid.Row="2"
+					Grid.ColumnSpan="2"
+					Command="{Binding EditRecord}"
+					Content="Edit record"
+					Background="#1fab18"/>
+			<Button Grid.Column="4"
+					Grid.Row="2"
+					Grid.ColumnSpan="2"
+					Command="{Binding CloseEditWindow}"
+					Content="Cancel"
+					Background="#b81f1f"/>
+		</Grid>
+	</Border>
+</Window>

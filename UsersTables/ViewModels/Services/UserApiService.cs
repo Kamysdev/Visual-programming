@@ -22,8 +22,8 @@ internal class UserApiService
         };
     }
 
-    public async Task<UserApiResponse> GetUserInformation()
+    public async Task<List<UserApiResponse>> GetUserInformation()
     {
-        return await _httpClient.GetFromJsonAsync<UserApiResponse>("users");
+        return await _httpClient.GetFromJsonAsync<List<UserApiResponse>>($"users");
     }
 }
