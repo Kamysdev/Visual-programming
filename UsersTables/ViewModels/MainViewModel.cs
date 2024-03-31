@@ -5,6 +5,10 @@ using System.Collections.ObjectModel;
 using ReactiveUI;
 using System.Reactive.Linq;
 using System.IO;
+using System.Linq;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.VisualTree;
 
 namespace UsersTables.ViewModels;
 
@@ -27,6 +31,7 @@ public partial class MainViewModel : ViewModelBase
         LoggingObserver logsObserver = new LoggingObserver("C:\\Users\\Kamys\\source\\repos\\Kamysdev\\Visual programming\\1.txt");
         observable.Subscribe(logsObserver);
 
+
         FetchUserInformation();
     }
 
@@ -46,9 +51,22 @@ public partial class MainViewModel : ViewModelBase
                     userApiResponse[i].address.city,
                     userApiResponse[i].company.name));
             }
+            UsersList[1].Name = "BBBBBB";
         }
     }
 
+    private void deleteFoo(object sender)
+    {
+        if (sender is Button button && button.Name == "delete")
+        {
+            var row = VisualExtensions.FindAncestorOfType<DataGridRow>(button);
+            if (row != null)
+            {
+/*                string data = dataGrid.Items[row.GetIndex()].ToString();
+                // здесь вы можете использовать данные*/
+            }
+        }
+    }
 
     public class ObservableCollectionFactory
     {
@@ -92,6 +110,31 @@ public partial class MainViewModel : ViewModelBase
         public void OnNext(ICollectionChange value)
         {
             string logMessage = $"{value.Collection}";
+            value.Collection.CollectionChanged += (s, e) =>
+            {
+                if (e.NewItems != null)
+                {
+                    User user = e.NewItems.Cast<User>().FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.PropertyChanged += (s1, e1) =>
+                        {
+                            System.IO.File.AppendAllText(_logFilePath, $"{e1.PropertyName} changed" + Environment.NewLine);
+                        };
+                    }
+                }
+                else if (e.OldItems != null)
+                {
+                    User user = e.OldItems.Cast<User>().FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.PropertyChanged += (s1, e1) =>
+                        {
+                            System.IO.File.AppendAllText(_logFilePath, $"{e1.PropertyName} changed" + Environment.NewLine);
+                        };
+                    }
+                }
+            };
             System.IO.File.AppendAllText(_logFilePath, logMessage + Environment.NewLine);
         }
 

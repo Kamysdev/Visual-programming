@@ -35,6 +35,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsersTables", "UsersTables\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsersTables.Desktop", "UsersTables.Desktop\UsersTables.Desktop.csproj", "{C54E084F-24A8-4621-BC00-C1D1397A0B72}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab9", "Lab9", "{6084F4D6-4C35-4D75-A4EF-238BA8EA2E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomUserControl", "CustomUserControl\CustomUserControl.csproj", "{B5CB36DD-8476-4BB4-A4B4-A00A97328699}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,10 @@ Global
 		{C54E084F-24A8-4621-BC00-C1D1397A0B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C54E084F-24A8-4621-BC00-C1D1397A0B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C54E084F-24A8-4621-BC00-C1D1397A0B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5CB36DD-8476-4BB4-A4B4-A00A97328699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CB36DD-8476-4BB4-A4B4-A00A97328699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CB36DD-8476-4BB4-A4B4-A00A97328699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CB36DD-8476-4BB4-A4B4-A00A97328699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +108,7 @@ Global
 		{F43DF831-0AB6-41EB-9FAF-8887E6E22C6D} = {992E32C6-ADD7-4F4F-9096-06AF2833B61D}
 		{17903CE8-F0AA-4EBE-9AB0-A32136416120} = {268B9B4A-C392-4B01-BBE0-74320C04AB4A}
 		{C54E084F-24A8-4621-BC00-C1D1397A0B72} = {268B9B4A-C392-4B01-BBE0-74320C04AB4A}
+		{B5CB36DD-8476-4BB4-A4B4-A00A97328699} = {6084F4D6-4C35-4D75-A4EF-238BA8EA2E32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EBD6783-4AA3-46D5-B9F5-BAE17F7E5223}

@@ -23,7 +23,8 @@
 						  Command="{Binding ShowEditWindow}"/>
 			</MenuItem>
 		</Menu>
-		<DataGrid Grid.Row="1"
+		<DataGrid x:Name="dataGrid"
+			      Grid.Row="1"
 			      Margin="20"
 				  ItemsSource="{Binding UsersList}"
                   IsReadOnly="False"
@@ -50,6 +51,20 @@
 								    Binding="{Binding City}" />
                 <DataGridTextColumn Header="Company" 
 								    Binding="{Binding CompanyName}" />
+			    <DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Button Content="X" Command="{Binding deleteFoo}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Button Content="Edit"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 	</Grid>
