@@ -1,9 +1,29 @@
-﻿namespace CustomUserControl.ViewModels
+﻿using ReactiveUI;
+using System;
+
+namespace CustomUserControl.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-#pragma warning disable CA1822 // Mark members as static
-        public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+        private object content;
+
+        public object Content
+        {
+            get => content;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref content, value);
+            }
+        }
+
+        public MainWindowViewModel()
+        {
+            Content = new MixerViewModel();
+        }
+
+        private void Window_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        {
+            Content = new MixerMinizedViewModel();
+        }
     }
 }
