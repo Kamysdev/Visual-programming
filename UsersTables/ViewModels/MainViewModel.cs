@@ -51,20 +51,6 @@ public partial class MainViewModel : ViewModelBase
                     userApiResponse[i].address.city,
                     userApiResponse[i].company.name));
             }
-            UsersList[1].Name = "BBBBBB";
-        }
-    }
-
-    private void deleteFoo(object sender)
-    {
-        if (sender is Button button && button.Name == "delete")
-        {
-            var row = VisualExtensions.FindAncestorOfType<DataGridRow>(button);
-            if (row != null)
-            {
-/*                string data = dataGrid.Items[row.GetIndex()].ToString();
-                // здесь вы можете использовать данные*/
-            }
         }
     }
 

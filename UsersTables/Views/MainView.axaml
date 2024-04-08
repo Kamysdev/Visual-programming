@@ -51,20 +51,6 @@
 								    Binding="{Binding City}" />
                 <DataGridTextColumn Header="Company" 
 								    Binding="{Binding CompanyName}" />
-			    <DataGridTemplateColumn>
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<Button Content="X" Command="{Binding deleteFoo}"/>
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn>
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<Button Content="Edit"/>
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 	</Grid>
