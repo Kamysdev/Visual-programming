@@ -234,6 +234,12 @@ namespace ColorPicker.ViewModels
             return SelectedRGBA;
         }
 
+        /// <summary>
+        /// Issue: избавиться от обратной связи запроса view модель -> ViewModel
+        /// Реализовать привязку данных от кисти к Rectangle (Заменить Panel на фигуру 
+        /// и изменить свойста изменения цвета)
+        /// </summary>
+
         public void Colors_Changed()
         {
             var view = ViewLocator.GetView(this);
@@ -245,9 +251,6 @@ namespace ColorPicker.ViewModels
                     var Picker = widnow.Find<Panel>("Palet");
                     if (Picker != null)
                     {
-                        Picker.Background = new SolidColorBrush(Avalonia.Media.Color.FromArgb(255, Convert.ToByte(RChanel), 
-                                                                                                    Convert.ToByte(GChanel),
-                                                                                                    Convert.ToByte(BChanel)));
                     }
                 }
                 catch (Exception ex) { }
