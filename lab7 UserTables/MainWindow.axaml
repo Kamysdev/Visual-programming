@@ -1,0 +1,90 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+		Width="1000" Height="600" MinWidth="1000" MinHeight="600"
+		MaxWidth="1000" MaxHeight="600"
+        x:Class="lab7.MainWindow"
+		xmlns:vm="clr-namespace:lab7.Models.ViewModels"
+		x:DataType="vm:UserInfoPageViewModel"
+        Title="lab7">
+	<Window.DataContext>
+		<vm:UserInfoPageViewModel/>
+	</Window.DataContext>
+	<Window.Styles>
+		<FluentTheme />
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+	</Window.Styles>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.5*" />
+			<RowDefinition Height="0.05*" />
+			<RowDefinition Height="0.05*" />
+			<RowDefinition Height="0.05*" />
+			<RowDefinition Height="0.35*" />
+		</Grid.RowDefinitions>
+		<DataGrid Grid.Row="0" Margin="20" ItemsSource="{Binding User}"
+          CanUserSortColumns="False"
+          GridLinesVisibility="All"
+          BorderThickness="1" BorderBrush="Gray">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+				<DataGridTextColumn Header="Name"  Binding="{Binding Name}"/>
+				<DataGridTextColumn Header="Username" Binding="{Binding UserName}" />
+				<DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+				<DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
+			</DataGrid.Columns>
+		</DataGrid>
+		<Grid Grid.Row="1" Margin="20">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.05*" />
+				<ColumnDefinition Width="0.11*" />
+				<ColumnDefinition Width="0.11*" />
+				<ColumnDefinition Width="0.15*" />
+				<ColumnDefinition Width="0.15*" />
+				<ColumnDefinition Width="0.1*" />
+			</Grid.ColumnDefinitions>
+			<TextBox IsReadOnly="True" Grid.Column="0" Text="{Binding TmpId, Mode=TwoWay}" />
+			<TextBox Grid.Column="1" Text="{Binding TmpName, Mode=TwoWay}" />
+			<TextBox Grid.Column="2" Text="{Binding TmpUsername, Mode=TwoWay}" />
+			<TextBox Grid.Column="3" Text="{Binding TmpEmail, Mode=TwoWay}" />
+			<TextBox Grid.Column="4" Text="{Binding TmpPhone, Mode=TwoWay}" />
+			<Button Grid.Column="5" Command="{Binding AddUser}" HorizontalContentAlignment="Center" Content="Add" Margin="20,0,0,0" Width="100" Height="35" />
+		</Grid>
+
+		<Grid Grid.Row="2" Margin="20">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.05*" />
+				<ColumnDefinition Width="0.11*" />
+				<ColumnDefinition Width="0.11*" />
+				<ColumnDefinition Width="0.15*" />
+				<ColumnDefinition Width="0.15*" />
+				<ColumnDefinition Width="0.1*" />
+			</Grid.ColumnDefinitions>
+			<TextBox Grid.Column="0" Text="{Binding TmpIdEdit, Mode=TwoWay}" />
+			<TextBox Grid.Column="1" Text="{Binding TmpNameEdit, Mode=TwoWay}" />
+			<TextBox Grid.Column="2" Text="{Binding TmpUsernameEdit, Mode=TwoWay}" />
+			<TextBox Grid.Column="3" Text="{Binding TmpEmailEdit, Mode=TwoWay}" />
+			<TextBox Grid.Column="4" Text="{Binding TmpPhoneEdit, Mode=TwoWay}" />
+			<Button Grid.Column="5" Command="{Binding EditUser}" HorizontalContentAlignment="Center" Content="Edit" Margin="20,0,0,0" Width="100" Height="35" />
+		</Grid>
+
+		<Grid Grid.Row="3" Margin="20">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.05*" />
+				<ColumnDefinition Width="0.11*" />
+				<ColumnDefinition Width="0.11*" />
+				<ColumnDefinition Width="0.15*" />
+				<ColumnDefinition Width="0.15*" />
+				<ColumnDefinition Width="0.1*" />
+			</Grid.ColumnDefinitions>
+			<TextBox Grid.Column="0" Text="{Binding TmpIdRemove, Mode=TwoWay}" />
+			<TextBox IsReadOnly="True" Grid.Column="1" Text="" />
+			<TextBox IsReadOnly="True" Grid.Column="2" Text="" />
+			<TextBox IsReadOnly="True" Grid.Column="3" Text="" />
+			<TextBox IsReadOnly="True" Grid.Column="4" Text="" />
+			<Button Grid.Column="5" Command="{Binding RemoveUser}" HorizontalContentAlignment="Center" Content="Remove" Margin="20,0,0,0" Width="100" Height="35" />
+		</Grid>
+	</Grid>
+</Window>
