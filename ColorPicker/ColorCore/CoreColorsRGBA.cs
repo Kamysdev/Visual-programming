@@ -33,6 +33,15 @@ namespace ColorPicker.ColorCore
             CoreColors = coreColors;
         }
 
+        public CoreColorsRGBA(CoreColorsRGBA inputColor)
+        {
+            R = inputColor.R;
+            G = inputColor.G;
+            B = inputColor.B;
+            A = inputColor.A;
+            CoreColors = inputColor.CoreColors;
+        }
+
         public CoreColorsRGBA()
         {
 

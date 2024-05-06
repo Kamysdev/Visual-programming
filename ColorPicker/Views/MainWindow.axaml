@@ -1,6 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:ColorPicker.ViewModels"
+		xmlns:con="clr-namespace:ColorPicker.Converter;assembly=ColorPicker"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+		xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="560" d:DesignHeight="420"
@@ -30,12 +33,20 @@
 		</Style>
 		
 	</Window.Styles>
+
+	<Window.Resources>
+		<con:RGBAToSolidColorConverter x:Key="ColorResources"></con:RGBAToSolidColorConverter>
+	</Window.Resources>
 	
 	<Grid ColumnDefinitions="15 * *" ShowGridLines="False">
 		<Grid Grid.Column="1" RowDefinitions="30 1.6* 30 *" ShowGridLines="False">
 			<TextBlock ZIndex="1" Text="Основные цвета:" VerticalAlignment="Center"/>
 
-			<ListBox Grid.Row="1" ItemsSource="{Binding BaseColor}" Padding="15 0">
+			<ListBox Grid.Row="1" 
+					 ItemsSource="{Binding BaseColor}" 
+					 SelectedItem="{Binding SelectedColor}"
+					 Name="Default__List"
+					 Padding="15 0">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<WrapPanel Orientation="Horizontal" ScrollViewer.IsScrollInertiaEnabled="True">
@@ -51,6 +62,13 @@
 					</Style>
 				</ListBox.Styles>
 
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="DoubleTapped">
+						<ia:InvokeCommandAction Command="{Binding LoadDefaultColor}"
+												CommandParameter="{Binding #Default__List.SelectedItem}"/>
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+				
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Panel Height="15" Width="15" Background="{Binding ColorBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -60,8 +78,9 @@
 			
 			<TextBlock ZIndex="1" Grid.Row="2" Text="Дополнительные цвета: " VerticalAlignment="Center"/>
 			
-			<ListBox Grid.Row="2">
-
+			
+			<ListBox Grid.Row="2" ItemsSource="" Padding="15 0">
+				
 			</ListBox>
 		</Grid>
 		
@@ -71,7 +90,11 @@
 
 			<Grid Grid.Row="1" RowDefinitions="1.5* 0.5*" ColumnDefinitions="0.8* * *" ShowGridLines="True">
 				<Border BorderThickness="1" BorderBrush="DarkGray" Width="70" Height="50">
-					<Panel x:Name="Palet"/>
+					<Panel x:Name="Palet" Background="{Binding ., Converter={StaticResource ColorResources}}">
+						<Panel.Resources>
+							
+						</Panel.Resources>
+					</Panel>
 				</Border>
 
 				<Grid Grid.Column="1" RowDefinitions="* * *" ShowGridLines="True">

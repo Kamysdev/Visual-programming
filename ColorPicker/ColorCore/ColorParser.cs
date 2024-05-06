@@ -16,7 +16,6 @@ namespace ColorPicker.ColorCore
 
             return HEX;
         }
-
         private string Get16X(int colorCode)
         {
             if (colorCode >= 16) 
@@ -27,6 +26,14 @@ namespace ColorPicker.ColorCore
             {
                 return "0" + Convert.ToString(colorCode, 16).ToUpper();
             }
+        }
+
+        public CoreColorsRGBA ParseToBYTE(string HEX)
+        {
+            HEX = HEX.Remove(0, 1);
+            return new CoreColorsRGBA(Int32.Parse(HEX.Remove(2)), 
+                Int32.Parse(HEX.Remove(0, 2).Remove(2)),
+                Int32.Parse(HEX.Remove(0, 4)), 255);
         }
     }
 }

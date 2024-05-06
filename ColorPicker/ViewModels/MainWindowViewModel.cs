@@ -6,6 +6,7 @@ using System;
 using Avalonia;
 using System.Collections.Generic;
 using DynamicData;
+using Avalonia.Interactivity;
 
 namespace ColorPicker.ViewModels
 {
@@ -22,6 +23,13 @@ namespace ColorPicker.ViewModels
             set { _BaseColor = value; OnPropertyChanged(nameof(BaseColor)); }
         }
         public ObservableCollection<CoreColors> _BaseColor { get; set; } = [];
+
+        public ObservableCollection<CoreColors> BaseColorZero
+        {
+            get => _BaseColorZero;
+            set { _BaseColorZero = value; OnPropertyChanged(nameof(BaseColorZero)); }
+        }
+        public ObservableCollection<CoreColors> _BaseColorZero { get; set; } = [];
 
         public CoreColors SelectedColor { get; set; }
 
@@ -102,8 +110,13 @@ namespace ColorPicker.ViewModels
             BaseColor.Add(new CoreColors("#000000"));
         }
 
-        private Point _Pos;
-        private Point Pos
+        private void LoadDefaultColor(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private Avalonia.Point _Pos;
+        private Avalonia.Point Pos
         {
             get { return _Pos; }
             set
@@ -116,10 +129,11 @@ namespace ColorPicker.ViewModels
             }
         }
 
-        public void UpdateData(Point data)
+        public CoreColorsRGBA UpdateRGBA(Point data)
         {
             Pos = data;
-            SetColor();
+            
+            return SetColor();
         }
 
         private CoreColorsRGBA SelectedRGBA = new CoreColorsRGBA(255, 0, 0, 255);
@@ -138,7 +152,7 @@ namespace ColorPicker.ViewModels
             }
         }
 
-        private void SetColor()
+        private CoreColorsRGBA SetColor()
         {
             int r, g, b;
 
@@ -160,17 +174,14 @@ namespace ColorPicker.ViewModels
             }
             else
             {
-                r = 255;
+                r = ((int)Pos.X - 170) * 3;
 
-                g = 255;
+                g = 255 - ((int)Pos.X - 170) * 3;
 
                 b = 255;
             }
 
-            SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
-            SelectedCoreColor = SelectedRGBA.CoreColors.ColorBrush;
+            return SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
         }
-
-
     }
 }
