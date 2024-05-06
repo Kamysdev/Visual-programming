@@ -2,6 +2,10 @@
 using Avalonia.Media;
 using System.Collections.ObjectModel;
 using ColorPicker.ColorCore;
+using System;
+using Avalonia;
+using System.Collections.Generic;
+using DynamicData;
 
 namespace ColorPicker.ViewModels
 {
@@ -23,14 +27,7 @@ namespace ColorPicker.ViewModels
 
         private void StandInInit()
         {
-            string HEX = "#000000";
-            for (var i = 0; i < 1000; i++)
-            {
-                PaletColor.Add(new CoreColors(HEX));
-                HEX = "#C71585";
-            }
-
-            BaseColor.Add(new CoreColors("#CD5C5C"));
+            BaseColor.Add(new CoreColors("rgb(255, 56, 80)"));
             BaseColor.Add(new CoreColors("#F08080"));
             BaseColor.Add(new CoreColors("#FA8072"));
             BaseColor.Add(new CoreColors("#E9967A"));
@@ -105,14 +102,75 @@ namespace ColorPicker.ViewModels
             BaseColor.Add(new CoreColors("#000000"));
         }
 
-
-        public ObservableCollection<CoreColors> PaletColor
+        private Point _Pos;
+        private Point Pos
         {
-            get => _PaletColor;
-            set { _PaletColor = value; OnPropertyChanged(nameof(PaletColor)); }
+            get { return _Pos; }
+            set
+            {
+                if (_Pos != value)
+                {
+                    _Pos = value;
+                    OnPropertyChanged(nameof(Pos));
+                }
+            }
         }
-        public ObservableCollection<CoreColors> _PaletColor { get; set; } = [];
-    }
 
-    
+        public void UpdateData(Point data)
+        {
+            Pos = data;
+            SetColor();
+        }
+
+        private CoreColorsRGBA SelectedRGBA = new CoreColorsRGBA(255, 0, 0, 255);
+
+        public string _SelectedCoreColor = "#F256BC";
+        public string SelectedCoreColor
+        {
+            get => _SelectedCoreColor;
+            set
+            {
+                if (_SelectedCoreColor != value)
+                {
+                    _SelectedCoreColor = value;
+                    OnPropertyChanged(nameof(SelectedCoreColor));
+                }
+            }
+        }
+
+        private void SetColor()
+        {
+            int r, g, b;
+
+            if (Pos.X < 85)
+            {
+                r = 255;
+
+                g = (int)Pos.X * 3;
+
+                b = 0;
+            }
+            else if (Pos.X < 170)
+            {
+                r = 255 - ((int)Pos.X - 85) * 3;
+
+                g = 255;
+
+                b = ((int)Pos.X - 85) * 3;
+            }
+            else
+            {
+                r = 255;
+
+                g = 255;
+
+                b = 255;
+            }
+
+            SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
+            SelectedCoreColor = SelectedRGBA.CoreColors.ColorBrush;
+        }
+
+
+    }
 }

@@ -13,6 +13,11 @@ namespace ColorPicker.ColorCore
             ColorBrush = colorBrush;
         }
 
+        public CoreColors()
+        {
+            ColorBrush = "";
+        }
+
         public string ColorBrush { get; set; }
     }
 }

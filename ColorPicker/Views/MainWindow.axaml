@@ -24,6 +24,11 @@
 		<Style Selector="TextBlock">
 			<Setter Property="Foreground" Value="Black"/>
 		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="Width" Value="60"/>
+			<Setter Property="Height" Value="24"/>
+		</Style>
+		
 	</Window.Styles>
 	
 	<Grid ColumnDefinitions="15 * *" ShowGridLines="False">
@@ -60,31 +65,30 @@
 			</ListBox>
 		</Grid>
 		
-		<Grid Grid.Column="2" RowDefinitions="1.75* *" ShowGridLines="True">
-			<ListBox ItemsSource="{Binding PaletColor}"  Background="Red" Margin="35">
-				<ListBox.ItemsPanel>
-					<ItemsPanelTemplate>
-						<WrapPanel Orientation="Horizontal" ScrollViewer.IsScrollInertiaEnabled="True">
-						</WrapPanel>
-					</ItemsPanelTemplate>
-				</ListBox.ItemsPanel>
+		<Grid Grid.Column="2" RowDefinitions="1.75* *">
+			<Image Width="255" Source="avares://ColorPicker/Assets/colorpicker.png" PointerPressed="w_PointerPressed"/>
+			<Slider VerticalAlignment="Bottom"/>
 
-				<ListBox.Styles>
-					<Style Selector="ListBoxItem">
-						<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-						<Setter Property="Width" Value="1"/>
-						<Setter Property="Height" Value="1"/>
-					</Style>
-				</ListBox.Styles>
+			<Grid Grid.Row="1" RowDefinitions="1.5* 0.5*" ColumnDefinitions="0.8* * *" ShowGridLines="True">
+				<Border BorderThickness="1" BorderBrush="DarkGray" Width="70" Height="50">
+					<Panel x:Name="Palet"/>
+				</Border>
 
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Panel Height="25" Width="25" Background="{Binding ColorBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+				<Grid Grid.Column="1" RowDefinitions="* * *" ShowGridLines="True">
+					<TextBox/>
+					<TextBox Grid.Row="1"/>
+					<TextBox Grid.Row="2"/>
+				</Grid>
+				
+				
+				<Button Grid.Row="1" 
+						Grid.ColumnSpan="3" 
+						Content="Добавить в набор" 
+						HorizontalAlignment="Stretch"
+						HorizontalContentAlignment="Center"
+						Foreground="Black"
+						Background="LightGray"/>
+			</Grid>
 		</Grid>
 	</Grid>
-	
-	
 </Window>

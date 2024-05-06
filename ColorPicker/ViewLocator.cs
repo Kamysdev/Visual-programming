@@ -30,4 +30,21 @@ namespace ColorPicker
             return data is ViewModelBase;
         }
     }
+
+    public static class ViewModelLocator
+    {
+        private static MainWindowViewModel _viewModel;
+
+        public static MainWindowViewModel MainWindowViewModelInstance
+        {
+            get
+            {
+                if (_viewModel == null)
+                {
+                    _viewModel = new MainWindowViewModel();
+                }
+                return _viewModel;
+            }
+        }
+    }
 }
