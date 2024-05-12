@@ -1,11 +1,6 @@
-﻿using Avalonia.Controls;
-using Avalonia.Media;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ColorPicker.ColorCore;
-using System;
 using Avalonia;
-using System.Collections.Generic;
-using DynamicData;
 using Avalonia.Interactivity;
 
 namespace ColorPicker.ViewModels
@@ -136,7 +131,7 @@ namespace ColorPicker.ViewModels
             return SetColor();
         }
 
-        private CoreColorsRGBA SelectedRGBA = new CoreColorsRGBA(255, 0, 0, 255);
+        private CoreColorsRGBA SelectedRGBA;
 
         public string _SelectedCoreColor = "#F256BC";
         public string SelectedCoreColor
@@ -154,32 +149,66 @@ namespace ColorPicker.ViewModels
 
         private CoreColorsRGBA SetColor()
         {
-            int r, g, b;
+            int r, g, b, brightness;
+
+            brightness = (int)Pos.Y * 3;
+
 
             if (Pos.X < 85)
             {
                 r = 255;
-
                 g = (int)Pos.X * 3;
-
                 b = 0;
+
+                if (Pos.Y < 85)
+                {
+                    brightness = 255 - brightness;
+                    g += brightness;
+                    b += brightness;
+                }
             }
             else if (Pos.X < 170)
             {
                 r = 255 - ((int)Pos.X - 85) * 3;
-
                 g = 255;
-
                 b = ((int)Pos.X - 85) * 3;
+
+                if (Pos.Y < 85)
+                {
+                    brightness = 255 - brightness;
+                    r += brightness;
+                    b += brightness;
+                }
             }
             else
             {
                 r = ((int)Pos.X - 170) * 3;
-
                 g = 255 - ((int)Pos.X - 170) * 3;
-
                 b = 255;
+
+                if (Pos.Y < 85)
+                {
+                    brightness = 255 - brightness;
+                    r += brightness;
+                    g += brightness;
+                }
             }
+
+            if (Pos.Y > 85)
+            {
+                brightness = ((int)Pos.Y - 85) * 3;
+                r -= brightness;
+                g -= brightness;
+                b -= brightness;
+            }
+
+            if (r > 255) r = 255;
+            if (g > 255) g = 255;
+            if (b > 255) b = 255;
+
+            if (r < 0) r = 0;
+            if (g < 0) g = 0;
+            if (b < 0) b = 0;
 
             return SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
         }
