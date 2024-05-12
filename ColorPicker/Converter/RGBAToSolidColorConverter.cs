@@ -15,6 +15,11 @@ namespace ColorPicker.Converter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                return new SolidColorBrush(Color.FromArgb(255, 0, 0, 255));
+            }
+
             if (value is CoreColors color)
             {
                 ColorParser parser = new ColorParser();
@@ -33,7 +38,7 @@ namespace ColorPicker.Converter
                 return new SolidColorBrush(Color.FromArgb(255, (byte)_convertSolidColor.R, (byte)_convertSolidColor.G, (byte)_convertSolidColor.B));
             }
 
-            return new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+            return new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

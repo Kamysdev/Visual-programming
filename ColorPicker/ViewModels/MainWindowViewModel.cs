@@ -3,6 +3,9 @@ using ColorPicker.ColorCore;
 using Avalonia;
 using Avalonia.Interactivity;
 using DynamicData;
+using Avalonia.Media;
+using System.Collections.Specialized;
+using ReactiveUI;
 
 namespace ColorPicker.ViewModels
 {
@@ -11,6 +14,10 @@ namespace ColorPicker.ViewModels
         public MainWindowViewModel()
         {
             StandInInit();
+
+
+            CustomColor.CollectionChanged += Colors_CollectionChanged;
+
             CustomColor.Add(new CoreColorsRGBA(0, 10, 255, 255));
         }
 
@@ -23,10 +30,18 @@ namespace ColorPicker.ViewModels
 
         public ObservableCollection<CoreColorsRGBA> CustomColor
         {
-            get { return _CustomColor ?? (_CustomColor = new ObservableCollection<CoreColorsRGBA>()); }
-            set { _CustomColor = value; OnPropertyChanged(nameof(CustomColor)); }
+            get => _CustomColor;
+            set
+            {
+                if (_CustomColor != value)
+                {
+                    _CustomColor = value;
+                    OnPropertyChanged(nameof(_CustomColor));
+                }
+            }
         }
-        public ObservableCollection<CoreColorsRGBA> _CustomColor { get; set; } = [];
+
+        public ObservableCollection<CoreColorsRGBA> _CustomColor { get; set; } = new ObservableCollection<CoreColorsRGBA>();
 
         public CoreColors SelectedColor { get; set; }
 
@@ -214,5 +229,9 @@ namespace ColorPicker.ViewModels
             return SelectedRGBA;
         }
 
+        private void Colors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+
+        }
     }
 }
