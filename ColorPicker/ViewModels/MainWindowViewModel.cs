@@ -1,11 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using ColorPicker.ColorCore;
-using Avalonia;
 using Avalonia.Interactivity;
-using DynamicData;
 using Avalonia.Media;
-using System.Collections.Specialized;
-using ReactiveUI;
+using System;
+using Avalonia.Controls;
 
 namespace ColorPicker.ViewModels
 {
@@ -15,11 +13,12 @@ namespace ColorPicker.ViewModels
         {
             StandInInit();
 
-
-            CustomColor.CollectionChanged += Colors_CollectionChanged;
-
             CustomColor.Add(new CoreColorsRGBA(0, 10, 255, 255));
         }
+
+        public string? RChanel { get; set; } = "255";
+        public string? GChanel { get; set; } = "255";
+        public string? BChanel { get; set; } = "255";
 
         public ObservableCollection<CoreColors> BaseColor 
         { 
@@ -153,14 +152,20 @@ namespace ColorPicker.ViewModels
             }
         }
          
-        public CoreColorsRGBA UpdateRGBA(Point data)
+        public CoreColorsRGBA UpdateRGBA(Avalonia.Point data)
         {
             Pos = data;
             
             return SetColor();
         }
 
-        private CoreColorsRGBA SelectedRGBA;
+        private CoreColorsRGBA SelectedRGBA
+        {
+            get => _SelectedRGBA;
+            set { _SelectedRGBA = value; OnPropertyChanged(nameof(SelectedRGBA)); }
+        }
+
+        private CoreColorsRGBA _SelectedRGBA;
 
         private CoreColorsRGBA SetColor()
         {
@@ -229,9 +234,24 @@ namespace ColorPicker.ViewModels
             return SelectedRGBA;
         }
 
-        private void Colors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void Colors_Changed()
         {
+            var view = ViewLocator.GetView(this);
 
+            if (view is Control widnow)
+            {
+                try
+                {
+                    var Picker = widnow.Find<Panel>("Palet");
+                    if (Picker != null)
+                    {
+                        Picker.Background = new SolidColorBrush(Avalonia.Media.Color.FromArgb(255, Convert.ToByte(RChanel), 
+                                                                                                    Convert.ToByte(GChanel),
+                                                                                                    Convert.ToByte(BChanel)));
+                    }
+                }
+                catch (Exception ex) { }
+            }
         }
     }
 }

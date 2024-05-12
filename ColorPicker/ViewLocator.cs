@@ -25,6 +25,16 @@ namespace ColorPicker
             return new TextBlock { Text = "Not Found: " + name };
         }
 
+        private static readonly IDataTemplate _dataTemplate = new ViewLocator();
+
+        public static Control? GetView(object? viewModel)
+        {
+            if (viewModel == null)
+                return null;
+
+            return _dataTemplate.Build(viewModel);
+        }
+
         public bool Match(object? data)
         {
             return data is ViewModelBase;

@@ -110,20 +110,24 @@
 
 			<Grid Grid.Row="1" RowDefinitions="1.5* 0.5*" ColumnDefinitions="0.8* * *" ShowGridLines="False">
 				<Border BorderThickness="1" BorderBrush="DarkGray" Width="70" Height="50">
-					<Panel x:Name="Palet" Background="{Binding ., Converter={StaticResource ColorResources}}">
-					</Panel>
+					<Panel x:Name="Palet" Background="{Binding ., Converter={StaticResource ColorResources}}"/>
 				</Border>
 
 				<Grid Grid.Column="1" RowDefinitions="* * *">
 					<TextBlock Text="R:" VerticalAlignment="Center"/> 
-					<TextBox/>
+					<TextBox Text="{Binding RChanel}"/>
 					<TextBlock Text="G:" VerticalAlignment="Center" Grid.Row="1"/> 
-					<TextBox Grid.Row="1"/>
+					<TextBox Text="{Binding GChanel}" Grid.Row="1"/>
 					<TextBlock Text="B:" VerticalAlignment="Center" Grid.Row="2"/> 
-					<TextBox Grid.Row="2"/>
+					<TextBox Text="{Binding BChanel}" Grid.Row="2"/>
 				</Grid>
 				<Grid Grid.Column="2" RowDefinitions="* * *">
-
+					<Button Content="Применить"
+							HorizontalAlignment="Center"
+							HorizontalContentAlignment="Center"
+							Foreground="Black"
+							Background="LightGray"
+							Command="{Binding Colors_Changed}"/>
 				</Grid>
 				
 				
