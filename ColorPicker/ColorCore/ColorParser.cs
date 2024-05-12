@@ -31,9 +31,10 @@ namespace ColorPicker.ColorCore
         public CoreColorsRGBA ParseToBYTE(string HEX)
         {
             HEX = HEX.Remove(0, 1);
-            return new CoreColorsRGBA(Int32.Parse(HEX.Remove(2)), 
-                Int32.Parse(HEX.Remove(0, 2).Remove(2)),
-                Int32.Parse(HEX.Remove(0, 4)), 255);
+
+            return new CoreColorsRGBA(int.Parse(HEX.Remove(2), System.Globalization.NumberStyles.HexNumber),
+                int.Parse(HEX.Remove(0, 2).Remove(2), System.Globalization.NumberStyles.HexNumber),
+                int.Parse(HEX.Remove(0, 4), System.Globalization.NumberStyles.HexNumber), 255);
         }
     }
 }

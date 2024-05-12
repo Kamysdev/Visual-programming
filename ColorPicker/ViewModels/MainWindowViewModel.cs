@@ -2,6 +2,7 @@
 using ColorPicker.ColorCore;
 using Avalonia;
 using Avalonia.Interactivity;
+using DynamicData;
 
 namespace ColorPicker.ViewModels
 {
@@ -19,18 +20,17 @@ namespace ColorPicker.ViewModels
         }
         public ObservableCollection<CoreColors> _BaseColor { get; set; } = [];
 
-        public ObservableCollection<CoreColors> BaseColorZero
+        public ObservableCollection<CoreColorsRGBA> CustomColor
         {
-            get => _BaseColorZero;
-            set { _BaseColorZero = value; OnPropertyChanged(nameof(BaseColorZero)); }
+            get => _CustomColor;
+            set { _CustomColor = value; OnPropertyChanged(nameof(CustomColor)); }
         }
-        public ObservableCollection<CoreColors> _BaseColorZero { get; set; } = [];
+        public ObservableCollection<CoreColorsRGBA> _CustomColor { get; set; } = [];
 
         public CoreColors SelectedColor { get; set; }
 
         private void StandInInit()
         {
-            BaseColor.Add(new CoreColors("rgb(255, 56, 80)"));
             BaseColor.Add(new CoreColors("#F08080"));
             BaseColor.Add(new CoreColors("#FA8072"));
             BaseColor.Add(new CoreColors("#E9967A"));
@@ -105,10 +105,23 @@ namespace ColorPicker.ViewModels
             BaseColor.Add(new CoreColors("#000000"));
         }
 
+        /// <summary>
+        /// Реализация методов взаимодействия пользователя 
+        /// </summary>
+
         private void LoadDefaultColor(object sender, RoutedEventArgs args)
         {
 
         }
+
+        public void AddCustomColor()
+        {
+            CustomColor.Add(SelectedRGBA);
+        }
+
+        /// <summary>
+        /// Реализация палитры
+        /// </summary>
 
         private Avalonia.Point _Pos;
         private Avalonia.Point Pos
@@ -132,20 +145,6 @@ namespace ColorPicker.ViewModels
         }
 
         private CoreColorsRGBA SelectedRGBA;
-
-        public string _SelectedCoreColor = "#F256BC";
-        public string SelectedCoreColor
-        {
-            get => _SelectedCoreColor;
-            set
-            {
-                if (_SelectedCoreColor != value)
-                {
-                    _SelectedCoreColor = value;
-                    OnPropertyChanged(nameof(SelectedCoreColor));
-                }
-            }
-        }
 
         private CoreColorsRGBA SetColor()
         {
@@ -212,5 +211,6 @@ namespace ColorPicker.ViewModels
 
             return SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
         }
+
     }
 }

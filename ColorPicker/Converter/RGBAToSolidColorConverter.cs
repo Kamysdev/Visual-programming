@@ -24,6 +24,15 @@ namespace ColorPicker.Converter
                 return new SolidColorBrush(Color.FromArgb(255, (byte)_convertSolidColor.R, (byte)_convertSolidColor.G, (byte)_convertSolidColor.B));
             }
 
+            if (value is CoreColorsRGBA colorRGB)
+            {
+                ColorParser parser = new ColorParser();
+
+                CoreColorsRGBA _convertSolidColor = new CoreColorsRGBA(parser.ParseToBYTE(colorRGB.CoreColors.ColorBrush));
+
+                return new SolidColorBrush(Color.FromArgb(255, (byte)_convertSolidColor.R, (byte)_convertSolidColor.G, (byte)_convertSolidColor.B));
+            }
+
             return new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         }
 
