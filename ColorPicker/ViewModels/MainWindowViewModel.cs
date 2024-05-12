@@ -11,6 +11,7 @@ namespace ColorPicker.ViewModels
         public MainWindowViewModel()
         {
             StandInInit();
+            CustomColor.Add(new CoreColorsRGBA(0, 10, 255, 255));
         }
 
         public ObservableCollection<CoreColors> BaseColor 
@@ -22,7 +23,7 @@ namespace ColorPicker.ViewModels
 
         public ObservableCollection<CoreColorsRGBA> CustomColor
         {
-            get => _CustomColor;
+            get { return _CustomColor ?? (_CustomColor = new ObservableCollection<CoreColorsRGBA>()); }
             set { _CustomColor = value; OnPropertyChanged(nameof(CustomColor)); }
         }
         public ObservableCollection<CoreColorsRGBA> _CustomColor { get; set; } = [];
@@ -136,7 +137,7 @@ namespace ColorPicker.ViewModels
                 }
             }
         }
-
+         
         public CoreColorsRGBA UpdateRGBA(Point data)
         {
             Pos = data;
@@ -151,7 +152,6 @@ namespace ColorPicker.ViewModels
             int r, g, b, brightness;
 
             brightness = (int)Pos.Y * 3;
-
 
             if (Pos.X < 85)
             {
@@ -209,7 +209,9 @@ namespace ColorPicker.ViewModels
             if (g < 0) g = 0;
             if (b < 0) b = 0;
 
-            return SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
+            SelectedRGBA = new CoreColorsRGBA(r, g, b, 255);
+
+            return SelectedRGBA;
         }
 
     }

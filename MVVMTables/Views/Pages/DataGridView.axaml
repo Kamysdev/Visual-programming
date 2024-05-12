@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:local="clr-namespace:MVVMAvalonia.ViewModels.Pages"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:DataType="local:DataGridViewModel"
+             x:Class="MVVMAvalonia.Views.Pages.DataGridView">
+
+	<StackPanel>
+		<DataGrid Margin="10" ItemsSource="{Binding Users}" GridLinesVisibility="All" CanUserReorderColumns="True" CanUserResizeColumns="True" BorderThickness="1" BorderBrush="Gray">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
+				<DataGridTextColumn IsReadOnly="False" Header="Name" Binding="{Binding Name}"/>
+				<DataGridTextColumn IsReadOnly="False" Header="User Name"  Binding="{Binding Username}"/>
+				<DataGridTextColumn IsReadOnly="False" Header="Email" Binding="{Binding Email}"/>
+				<DataGridTextColumn IsReadOnly="False" Header="Phone" Binding="{Binding Phone}"/>
+				<DataGridTextColumn IsReadOnly="False" Header="Website" Binding="{Binding Website}"/>
+				<DataGridTemplateColumn Header="Address">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+								<Grid Background="Bisque" Grid.Column="0" RowDefinitions="Auto,Auto">
+									<TextBlock Grid.Row="0" TextAlignment="Center">City</TextBlock>
+									<TextBox Grid.Row="1" Text="{Binding Address.City}"></TextBox>
+								</Grid>
+								<Grid Background="Chocolate" Grid.Column="1" RowDefinitions="Auto,Auto">
+									<TextBlock TextAlignment="Center" Grid.Row="0" VerticalAlignment="Center">Street</TextBlock>
+									<TextBox Grid.Row="1" Text="{Binding Address.Street}"></TextBox>
+								</Grid>
+								<Grid Background="BurlyWood" Grid.Column="2" RowDefinitions="Auto,Auto">
+									<TextBlock TextAlignment="Center" Grid.Row="0" VerticalAlignment="Center">Suite</TextBlock>
+									<TextBox Grid.Row="1" Text="{Binding Address.Suite}"></TextBox>
+								</Grid>
+								<Grid Background="DarkGray" Grid.Column="3" RowDefinitions="Auto,Auto">
+									<TextBlock TextAlignment="Center" Grid.Row="0" VerticalAlignment="Center">Zipcode</TextBlock>
+									<TextBox Grid.Row="1" Text="{Binding Address.Zipcode}"></TextBox>
+								</Grid>
+								<Grid Background="DarkGreen" Grid.Column="4" RowDefinitions="Auto,Auto">
+									<TextBlock TextAlignment="Center" Grid.Row="0" VerticalAlignment="Center">Lat</TextBlock>
+									<TextBox Grid.Row="1" Text="{Binding Address.Geo.Lat}"></TextBox>
+								</Grid>
+								<Grid Background="Cornsilk" Grid.Column="5" RowDefinitions="Auto,Auto">
+									<TextBlock TextAlignment="Center" Grid.Row="0" VerticalAlignment="Center">Lng</TextBlock>
+									<TextBox Grid.Row="1" Text="{Binding Address.Geo.Lng}"></TextBox>
+								</Grid>
+							</Grid>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</StackPanel>
+
+</UserControl>
