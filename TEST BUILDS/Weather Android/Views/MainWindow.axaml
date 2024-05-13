@@ -7,6 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Weather_Android.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
+		Background="{Binding MainBackground}"
         Title="Weather_Android">
         <views:MainView />
 </Window>
